@@ -1,4 +1,4 @@
-# SE-team-Q-Term-Project-2016-Fall-
+# SE_team_Q_Term_Project_2016_Fall
 
 
 ## Due: 11:59 PM, 11 Nov (Fri)

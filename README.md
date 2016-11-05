@@ -3,7 +3,7 @@
 
 ### Team Members:
 * [paulrbear] 21200167 JooHyung Kim
-* 
+* [boomkim] 21100088 BumHwan Kim
 *
 *
 

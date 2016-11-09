@@ -12,6 +12,16 @@
 
 ### README
 
-####Command Line Inputs
+#### Java Command Line Interface
 
-* d
+1. Parser
+1. Document
+1. Node
+ 1. Header
+ 1. Block
+ 1. Quoted Block
+ 1. Item List
+1. Token
+ 1. Plain
+ 1. Stylized Text
+ 1. HTML, Code

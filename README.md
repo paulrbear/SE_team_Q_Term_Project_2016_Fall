@@ -5,7 +5,7 @@
 * [paulrbear] 21200167 JooHyung Kim
 * [boomkim] 21100088 BumHwan Kim
 * [Younhong] 21400022 Younhong Ko
-*
+* [whaqldutk1] 214 Eunbi Jo
 
 
 

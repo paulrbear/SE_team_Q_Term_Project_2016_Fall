@@ -5,64 +5,72 @@ import java.util.Scanner;
 
 public class FileReader {
 	
-	public static void main(String args[]) throws IOException
-	{
-		int r = 1;
-		while(r > 0){
-			
-			// Enter input filename.
-			System.out.println("Enter name of a md file name: ");
-			Scanner input = new Scanner(System.in);
-			String filename = input.nextLine();		
-			if(validInput(filename) > 0)
-			{
-				continue;
-			}
-			
-			// Enter output filename.
-			System.out.println("Enter name of an output file: ");
-			String filename_out = input.nextLine();		
-			if(validInput(filename) > 0)
-			{
-				continue;
-			}
-			
-			// Enter the style of the file.
-			System.out.println("Enter style of the output file: ");
-			String style = input.nextLine();		
-			if(validInput(filename) > 0)
-			{
-				continue;
-			}
-			
-		}
-		
+private static void helpMe(){
+	System.out.println("this is help me");
+}
+
+private static void inputParser(String input){
+
+	String inputFile;
+	String outputFile;
+	String style;
+	int styleVariable=1;
+	int inputIndex=input.indexOf(".md");
+	int outputIndex=input.indexOf(".html");
+	int styleIndex=-1;
+	boolean order;
+	
+	//set style Type and index
+	if(input.matches("-p")){
+		styleIndex=input.indexOf("-p");
+		styleVariable = 1;
+	}else if(input.matches("-f")){
+		styleIndex=input.indexOf("-f");
+		styleVariable = 2;
+	}else if(input.matches("-s")){
+		styleIndex=input.indexOf("-s");
+		styleVariable = 3;
+	}
+	//check order
+	order = inputIndex<outputIndex && outputIndex<styleIndex;
+	if (!order){
+		System.out.println("no order");
+		System.exit(0);
+	}
+	//set input file name and output file name. 
+	if(order&&inputIndex>0&&outputIndex>0){
+		inputFile=input.substring(0, inputIndex+2);
+		outputFile=input.substring(inputIndex+4,outputIndex+4);
+		System.out.println("success!");
 	}
 	
-	static int validInput(String s)
-	{
-		char dotsplit = '.';
-		int result = 0;
-		// filename input ó��
-		if(s.isEmpty())
-		{
-			System.out.println("File name has not been entered. Enter the file name");
-			result = 1;
-		}
-		// filename that does not contain its type:
-		else if(s.indexOf(dotsplit)==0) // invalid because it does not have filename
-		{
-			System.out.println("Inappropriate file name! Please type a filename in following format:");
-			System.out.println("file_name.file_type");
-			result = 2;
-		}
-		else if(s.indexOf(dotsplit)==-1) // does not contain file type
-		{
-			System.out.println("please contain the file type.");
-			result = 3;
-		}
-		
-		return result;
+	if(!input.matches(".md")){
+		System.out.println("no .md");
+	}
+	if(!input.matches(".html")){
+		System.out.println("no .html");
 	}
 	
 }
+
+	public static void main(String[] args) {
+		String input = "";
+		for(int i=0;i<args.length;i++){
+			input=input + args[i];
+			input=input + " ";
+		}
+		
+		// System.out.print(input); //testcode
+		if(input==""){
+			System.out.println("아무것도 안넣었음");
+			helpMe();
+		}
+		if(input == "help"||input == "-h"||input == "h")helpMe();
+		inputParser(input);
+	
+	}
+}
+
+//file 존재 여부 체크
+//안되는 문자 거르고
+//

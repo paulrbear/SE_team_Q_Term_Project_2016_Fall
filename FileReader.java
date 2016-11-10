@@ -4,35 +4,77 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class FileReader {
-	public static void main(String args[]) throws IOException {
-		Scanner input = new Scanner(System.in);
+	
+private static void helpMe(){
+	System.out.println("this is help me");
+}
 
-		String input_file = args[0];
-		String output_file = args[1];
-		String style = args[2];
+private static void inputParser(String input){
 
-		while (!input_file.substring(input_file.length()-3, input_file.length()).equals(".md")) {
-			System.out.println("Not valid input file name");
-			System.out.println("Enter input file name: ");
-			input_file = input.nextLine();
+	String inputFile;
+	String outputFile;
+	String style;
+	int styleVariable=1;
+	int inputIndex=input.indexOf(".md");
+	int outputIndex=input.indexOf(".html");
+	int styleIndex=-1;
+	boolean order;
+	
+	//set style Type and index
+	if(input.matches("-p")){
+		styleIndex=input.indexOf("-p");
+		styleVariable = 1;
+	}else if(input.matches("-f")){
+		styleIndex=input.indexOf("-f");
+		styleVariable = 2;
+	}else if(input.matches("-s")){
+		styleIndex=input.indexOf("-s");
+		styleVariable = 3;
+	}
+	//check order
+	order = inputIndex<outputIndex && outputIndex<styleIndex;
+	if (!order){
+		System.out.println("no order");
+		System.exit(0);
+	}
+	//set input file name and output file name. 
+	if(order&&inputIndex>0&&outputIndex>0){
+		inputFile=input.substring(0, inputIndex+2);
+		outputFile=input.substring(inputIndex+4,outputIndex+4);
+		System.out.println("success!");
+	}
+	
+	if(!input.matches(".md")){
+		System.out.println("no .md");
+	}
+	if(!input.matches(".html")){
+		System.out.println("no .html");
+	}
+	
+}
+
+	public static void main(String[] args) {
+		String input = "";
+		for(int i=0;i<args.length;i++){
+			input=input + args[i];
+			input=input + " ";
 		}
-
-		System.out.println();
-		while (!output_file.substring(output_file.length()-5, output_file.length()).equals(".html")) {
-			System.out.println("Not valid output file name");
-			System.out.println("Enter output file name: ");
-			output_file = input.nextLine();
+		
+		System.out.print(input);
+		if(input==""){
+			System.out.println("아무것도 안넣었음");
+			helpMe();
 		}
-
-		System.out.println();
-		while (!style.equals("fancy") && !style.equals("plain") && !style.equals("slide")) {
-			System.out.println("Not valid style name");
-			System.out.println("Enter style name: ");
-			style = input.nextLine();
+		
+		if(input == "help"){
+		 helpMe();
+			
 		}
-
-		// String help = "help";
-		// check validity of file name and style
-
+		inputParser(input);
+	
 	}
 }
+
+//file 존재 여부 체크
+//안되는 문자 거르고
+//

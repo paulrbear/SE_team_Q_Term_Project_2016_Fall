@@ -37,6 +37,3 @@
  4. User should provide three elements (input_filename, style, and output_filename)
  	in the order suggested.
  5. Multiple input files are separated by a white-space.
-=======
-*
->>>>>>> refs/remotes/origin/master

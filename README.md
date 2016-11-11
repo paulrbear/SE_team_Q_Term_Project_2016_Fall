@@ -5,6 +5,7 @@
 * [paulrbear] 21200167 JooHyung Kim
 * [boomkim] 21100088 BumHwan Kim
 * [Younhong] 21400022 Younhong Ko
+<<<<<<< HEAD
 * [whaqldutk1] 21400722 Eunbee Jo
 
 
@@ -37,6 +38,9 @@
  4. User should provide three elements (input_filename, style, and output_filename)
  	in the order suggested.
  5. Multiple input files are separated by a white-space.
+=======
+*
+>>>>>>> refs/remotes/origin/master
 
 
 #### Java Command Line Interface

@@ -37,21 +37,3 @@
  4. User should provide three elements (input_filename, style, and output_filename)
  	in the order suggested.
  5. Multiple input files are separated by a white-space.
-=======
-*
->>>>>>> refs/remotes/origin/master
-
-
-#### Java Command Line Interface
-
-1. Parser
-1. Document
-1. Node
- 1. Header
- 1. Block
- 1. Quoted Block
- 1. Item List
-1. Token
- 1. Plain
- 1. Stylized Text
- 1. HTML, Code

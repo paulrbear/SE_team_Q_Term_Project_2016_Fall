@@ -8,7 +8,7 @@ public class CLI {
     private static void inputParser(String[] input){
         String[] inputFile = new String[10];
         String outputFile ="";
-      	//  String style;
+         //  String style;
         int styleVariable=1;
         int inputIndex=-1;
         int outputIndex=-1;
@@ -77,50 +77,54 @@ public class CLI {
         			outputFile=input[i];
         		}else{
         			outputFile=input[i]+".html";
-        		}
-        	}
+              }
+           }
         }
         if(inputIndex!=-1){
-        	//order check
+           //order check
             if (styleIndex==-1){
-            	order = inputIndex < outputIndex;
+               order = inputIndex < outputIndex;
             }
             else{
-            	order = (inputIndex < styleIndex) && (styleIndex < outputIndex);
+               order = (inputIndex < styleIndex) && (styleIndex < outputIndex);
             }
             if(order){
-            	//file export
-				try {
-					File file = new File(outputFile);
-					file.createNewFile();
-				} catch(IOException io) {
-					System.out.println("cannot create html file");
-				}
-            	System.out.println("file export executed");
-            	System.out.println(inputIndex +" "+ styleIndex+" " + outputIndex);
-            	for(int i=0;i<input.length;i++){
-            		System.out.println(input[i]);
-            	}
-            	for(int i=0;i<n;i++){
-            		System.out.println(inputFile[i]);
-            	}
-            	System.out.println(outputFile);
+               //file export
+            try {
+               File file = new File(outputFile);
+               file.createNewFile();
+            } catch(IOException io) {
+               System.out.println("cannot create html file");
+            }
+               System.out.println("file export executed");
+               System.out.println(inputIndex +" "+ styleIndex+" " + outputIndex);
+               for(int i=0;i<input.length;i++){
+                  System.out.println(input[i]);
+               }
+               for(int i=0;i<n;i++){
+                  System.out.println(inputFile[i]);
+               }
+               System.out.println(outputFile);
             }
             else{
-            	System.out.println("Syntax Error : [inputFileName], [style], [outputFileNmae]");
+               System.out.println("Syntax Error : [inputFileName], [style], [outputFileNmae]");
             }
         }
         else{
-        	System.out.println(".md file does not exist.");
+           System.out.println(".md file does not exist.");
         }
 
 
     }
+
 
     public static void main(String[] args) {
         if(args.length==1){
-        	if(args[0]=="help" || args[0]=="-h")helpMe();
+           if(args[0]=="help" || args[0]=="-h")helpMe();
         }
-    	inputParser(args);
+       inputParser(args);
     }
 }
+
+//check if file exists
+//invalid character

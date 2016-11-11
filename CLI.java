@@ -49,7 +49,8 @@ public class CLI {
         			helpMe();
         			System.exit(0);
         		}
-        	}else{
+        	}else if(input[0].contains(".md")){
+        		outputIndex = i;
 				// < > : " / \ | ? *
 				//system does not allow < > | *
 				//system permits : " / \ ? 
@@ -83,7 +84,11 @@ public class CLI {
 					helpMe();
 					System.exit(0);
 				}
-        		outputIndex = i;
+        		if (outputIndex != 1) {
+					System.out.println("No output file name");
+					helpMe();
+					System.exit(0);
+				}
         		if((input[i].length() >= 5) && input[i].substring(input[i].length()-5, input[i].length()).equals(".html")){
         			outputFile=input[i];
         		}else{
@@ -124,12 +129,14 @@ public class CLI {
         else{
            System.out.println(".md file does not exist.");
         }
-
-
     }
 
-
     public static void main(String[] args) {
+		if (args.length==0) {
+			System.out.println("No input");
+			helpMe();
+			System.exit(0);
+		}
         if(args.length==1){
            if(args[0]=="help" || args[0]=="-h")helpMe();
         }

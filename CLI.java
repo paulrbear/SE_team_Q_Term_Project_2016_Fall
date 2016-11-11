@@ -4,26 +4,30 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CLI {
-    
+
     private static void helpMe(){
         System.out.println("this is help me");
     }
-    
+
     private static void inputParser(String[] input){
-        
-        String[] inputFile;
+        String[] inputFile = new String[10];
         String outputFile ="";
-      //  String style;
+      	//  String style;
         int styleVariable=1;
         int inputIndex=-1;
         int outputIndex=-1;
         int styleIndex=-1;
         boolean order;
-        inputFile = new String[10];
-        
+
         int n=0;
         for(int i=0;i<input.length;i++){
         	if(input[i].contains(".md")){
+				if(input[i].substring(input[i].length()-3, input[i].length()).equals(".md")){
+        			inputFile[n]=input[i];
+        		}else{
+					System.out.println("problem");
+					System.exit(0);
+        		}
         		inputFile[n]=input[i];
         		inputIndex = i;
         		n++;
@@ -41,11 +45,11 @@ public class CLI {
         			break;
         		default:
         			System.out.println("Possible Style Options are : -p -f -s");
-        			break;
+        			System.exit(0);
         		}
         	}else{
         		outputIndex = i;
-        		if(input[i].contains(".html")){
+        		if(input[i].substring(input[i].length()-5, input[i].length()).equals(".html")){
         			outputFile=input[i];
         		}else{
         			outputFile=input[i]+".html";
@@ -62,12 +66,12 @@ public class CLI {
             }
             if(order){
             	//file export
-		try {
-			htmlFile = outputFile + ".html";
-			File file = new File(htmlFile);
-			file.createNewFile();
-		} catch(IOException io) {
-			System.out.println("cannot make output file");
+				try {
+					File file = new File(outputFile);
+					file.createNewFile();
+				} catch(IOException io) {
+					System.out.println("cannot create html file");
+				}
             	System.out.println("file export executed");
             	System.out.println(inputIndex +" "+ styleIndex+" " + outputIndex);
             	for(int i=0;i<input.length;i++){
@@ -85,11 +89,11 @@ public class CLI {
         else{
         	System.out.println(".md file does not exist.");
         }
-        
-    	
+
+
     }
-   
-	
+
+
     public static void main(String[] args) {
         if(args.length==1){
         	if(args[0]=="help" || args[0]=="-h")helpMe();
@@ -100,3 +104,5 @@ public class CLI {
 
 //check if file exists
 //invalid character
+
+// if (outpufFile.contains("-") ||

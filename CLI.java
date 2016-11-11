@@ -41,7 +41,7 @@ public class CLI {
         			styleVariable=3;
         			break;
         		default:
-        			System.out.println("스타일 옵션은 -p -f -s 중 하나여야 합니다.");
+        			System.out.println("Possible Style Options are : -p -f -s");
         			break;
         		}
         	}else{
@@ -74,11 +74,11 @@ public class CLI {
             	System.out.println(outputFile);
             }
             else{
-            	System.out.println("순서가 잘못됐습니다. 순서는 inputfileName style outputfilename 순 입니다.");
+            	System.out.println("Syntax Error : [inputFileName], [style], [outputFileNmae]");
             }
         }
         else{
-        	System.out.println(".md파일이 없습니다. ");
+        	System.out.println(".md file does not exist.");
         }
         
     	
@@ -93,5 +93,5 @@ public class CLI {
     }
 }
 
-//file 존재 여부 체크
-//안되는 문자 거르고
+//check if file exists
+//invalid character

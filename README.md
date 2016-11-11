@@ -25,7 +25,7 @@
 	[ -s ] : slide style
 
  - Other Keyword(s)
- 	[ -h ]	or [ help ]: "help"; shows help text. 
+ 	[ -h ]	or [ help ] : "help"; shows help text. 
 	
 
 ■ More Regulations

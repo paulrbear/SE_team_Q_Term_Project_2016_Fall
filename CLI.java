@@ -1,10 +1,6 @@
 import java.io.*;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class CLI {
-
     private static void helpMe(){
         System.out.println("this is help me");
     }
@@ -24,13 +20,18 @@ public class CLI {
         	if(input[i].contains(".md")){
 				if(input[i].substring(input[i].length()-3, input[i].length()).equals(".md")){
         			inputFile[n]=input[i];
+        			File file = new File (inputFile[n]);
+        			if (!file.exists()) {
+        				System.out.println("File does not exist");
+        				System.exit(0);
+					}
+        			inputIndex = i;
+        			n++;
         		}else{
-					System.out.println("problem");
+					System.out.println("inappropriate file extension");
+					helpMe();
 					System.exit(0);
         		}
-        		inputFile[n]=input[i];
-        		inputIndex = i;
-        		n++;
         	}else if(input[i].contains("-")){
         		styleIndex = i;
         		switch(input[i]){
@@ -45,11 +46,34 @@ public class CLI {
         			break;
         		default:
         			System.out.println("Possible Style Options are : -p -f -s");
+        			helpMe();
         			System.exit(0);
         		}
         	}else{
+				// < > : " / \ | ? *
+				if (input[i].contains("(char)60") ||
+					input[i].contains("(char)62") ||
+					input[i].contains("(char)58") ||
+					input[i].contains("\"") ||
+					input[i].contains("(char)47") ||
+					input[i].contains("\\") ||		// works fine
+					input[i].contains("(char)124") ||
+					input[i].contains("(char)63") ||
+					input[i].contains("(char)42") ) {
+						System.out.println("Invalid character in output file name");
+						System.exit(0);
+					}
+				if (input[i].equalsIgnoreCase("CON") ||
+					input[i].equalsIgnoreCase("PRN") ||
+					input[i].equalsIgnoreCase("AUX") ||
+					input[i].equalsIgnoreCase("NUL")
+				) {
+					System.out.println("illegal output file name");
+					helpMe();
+					System.exit(0);
+				}
         		outputIndex = i;
-        		if(input[i].substring(input[i].length()-5, input[i].length()).equals(".html")){
+        		if((input[i].length() >= 5) && input[i].substring(input[i].length()-5, input[i].length()).equals(".html")){
         			outputFile=input[i];
         		}else{
         			outputFile=input[i]+".html";
@@ -93,7 +117,6 @@ public class CLI {
 
     }
 
-
     public static void main(String[] args) {
         if(args.length==1){
         	if(args[0]=="help" || args[0]=="-h")helpMe();
@@ -101,8 +124,3 @@ public class CLI {
     	inputParser(args);
     }
 }
-
-//check if file exists
-//invalid character
-
-// if (outpufFile.contains("-") ||

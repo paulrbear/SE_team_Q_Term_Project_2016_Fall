@@ -2,76 +2,94 @@ import java.io.*;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.File;
 
-public class FileReader {
+public class CLI {
     
     private static void helpMe(){
         System.out.println("this is help me");
     }
     
-    private static void inputParser(String input){
+    private static void inputParser(String[] input){
         
-        String inputFile;
-        String outputFile;
-        String style;
+        String[] inputFile;
+        String outputFile ="";
+      //  String style;
         int styleVariable=1;
-        int inputIndex=input.indexOf(".md");
-        int outputIndex=input.indexOf(".html");
+        int inputIndex=-1;
+        int outputIndex=-1;
         int styleIndex=-1;
         boolean order;
+        inputFile = new String[10];
         
-        //set style Type and index
-        if(input.matches("-p")){
-            styleIndex=input.indexOf("-p");
-            styleVariable = 1;
-        }else if(input.matches("-f")){
-            styleIndex=input.indexOf("-f");
-            styleVariable = 2;
-        }else if(input.matches("-s")){
-            styleIndex=input.indexOf("-s");
-            styleVariable = 3;
+        int n=0;
+        for(int i=0;i<input.length;i++){
+        	if(input[i].contains(".md")){
+        		inputFile[n]=input[i];
+        		inputIndex = i;
+        		n++;
+        	}else if(input[i].contains("-")){
+        		styleIndex = i;
+        		switch(input[i]){
+        		case "-p": //plain option
+        			styleVariable=1;
+        			break;
+        		case "-f": //fancy option
+        			styleVariable=2;
+        			break;
+        		case "-s": //slide option
+        			styleVariable=3;
+        			break;
+        		default:
+        			System.out.println("스타일 옵션은 -p -f -s 중 하나여야 합니다.");
+        			break;
+        		}
+        	}else{
+        		outputIndex = i;
+        		if(input[i].contains(".html")){
+        			outputFile=input[i];
+        		}else{
+        			outputFile=input[i]+".html";
+        		}
+        	}
         }
-        //check order
-        order = inputIndex<outputIndex && outputIndex<styleIndex;
-        if (!order){
-            System.out.println("no order");
-            System.exit(0);
+        if(inputIndex!=-1){
+        	//order check
+            if (styleIndex==-1){
+            	order = inputIndex < outputIndex;
+            }
+            else{
+            	order = (inputIndex < styleIndex) && (styleIndex < outputIndex);
+            }
+            if(order){
+            	//file export
+            	System.out.println("file export executed");
+            	System.out.println(inputIndex +" "+ styleIndex+" " + outputIndex);
+            	for(int i=0;i<input.length;i++){
+            		System.out.println(input[i]);
+            	}
+            	for(int i=0;i<n;i++){
+            		System.out.println(inputFile[i]);
+            	}
+            	System.out.println(outputFile);
+            }
+            else{
+            	System.out.println("순서가 잘못됐습니다. 순서는 inputfileName style outputfilename 순 입니다.");
+            }
         }
-        //set input file name and output file name.
-        if(order&&inputIndex>0&&outputIndex>0){
-            inputFile=input.substring(0, inputIndex+2);
-            outputFile=input.substring(inputIndex+4,outputIndex+4);
-            System.out.println("success!");
+        else{
+        	System.out.println(".md파일이 없습니다. ");
         }
         
-        if(!input.matches(".md")){
-            System.out.println("no .md");
-        }
-        if(!input.matches(".html")){
-            System.out.println("no .html");
-        }
-        
+    	
     }
-    
+   
+	
     public static void main(String[] args) {
-        String input = "";
-        for(int i=0;i<args.length;i++){
-            input=input + args[i];
-            input=input + " ";
+        if(args.length==1){
+        	if(args[0]=="help" || args[0]=="-h")helpMe();
         }
-        
-        System.out.print(input);
-        if(input==""){
-            System.out.println("아무것도 안넣었음");
-            helpMe();
-        }
-        
-        if(input == "help"){
-            helpMe();
-            
-        }
-        inputParser(input);
-        
+    	inputParser(args);
     }
 }
 

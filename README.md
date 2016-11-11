@@ -25,7 +25,7 @@
 	[ -s ] : slide style
 
  - Other Keyword(s)
- 	[ -h ]	or [ help ]: "help"; the system opens README.md file.
+ 	[ -h ]	or [ help ]: "help"; shows help text. 
 	
 
 ■ More Regulations
@@ -37,3 +37,7 @@
  4. User should provide three elements (input_filename, style, and output_filename)
  	in the order suggested.
  5. Multiple input files are separated by a white-space.
+ 6. If file does not exist, error message comes out. 
+ 7. These characters are invalid for filename: [ < > : " / \ | ? * ]
+ 8. These strings are invalid for filename (SYSTEM regulation): [ CON, PRN, AUX, NUL ] 
+ 9. Only one option for Style is available.

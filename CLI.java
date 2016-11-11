@@ -13,6 +13,7 @@ public class CLI {
         int inputIndex=-1;
         int outputIndex=-1;
         int styleIndex=-1;
+        int numOfOption = 0;
         boolean order;
 
         int n=0;
@@ -33,22 +34,29 @@ public class CLI {
 					System.exit(0);
         		}
         	}else if(input[i].contains("-")){
-        		styleIndex = i;
-        		switch(input[i]){
-        		case "-p": //plain option
-        			styleVariable=1;
-        			break;
-        		case "-f": //fancy option
-        			styleVariable=2;
-        			break;
-        		case "-s": //slide option
-        			styleVariable=3;
-        			break;
-        		default:
-        			System.out.println("Possible Style Options are : -p -f -s");
-        			helpMe();
-        			System.exit(0);
-        		}
+				styleIndex = i;
+				numOfOption++;
+				if(numOfOption==1){
+					switch(input[i]){
+					case "-p": //plain option
+						styleVariable=1;
+						break;
+					case "-f": //fancy option
+						styleVariable=2;
+						break;
+					case "-s": //slide option
+						styleVariable=3;
+						break;
+					default:
+						System.out.println("Possible Style Options are : -p -f -s");
+						helpMe();
+						System.exit(0);
+					}
+				}else{
+					System.out.println("only one option is allowed");
+					helpMe();
+					System.exit(0);
+				}
         	}else if(input[0].contains(".md")){
         		outputIndex = i;
 				// < > : " / \ | ? *
@@ -73,7 +81,7 @@ public class CLI {
 					helpMe();
 					System.exit(0);
 				}
-        		if (outputIndex != 1) {
+        		if (outputIndex == -1) {
 					System.out.println("No output file name");
 					helpMe();
 					System.exit(0);

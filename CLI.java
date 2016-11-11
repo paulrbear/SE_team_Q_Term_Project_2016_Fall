@@ -51,18 +51,29 @@ public class CLI {
         		}
         	}else{
 				// < > : " / \ | ? *
-				if (input[i].contains("(char)60") ||
-					input[i].contains("(char)62") ||
-					input[i].contains("(char)58") ||
-					input[i].contains("\"") ||
-					input[i].contains("(char)47") ||
-					input[i].contains("\\") ||		// works fine
-					input[i].contains("(char)124") ||
-					input[i].contains("(char)63") ||
-					input[i].contains("(char)42") ) {
-						System.out.println("Invalid character in output file name");
-						System.exit(0);
-					}
+				//system does not allow < > | *
+				//system permits : " / \ ? 
+			        // CON, PRN, AUX, NUL
+			    if (
+				//input[i].contains("\u003C") || // <
+				//input[i].contains("\u003D") || // >
+				input[i].contains("\u003A") || // :
+				input[i].contains("\"") || // "
+				//\u0022
+				input[i].contains("\u002F") || // /
+				input[i].contains("\\") || // \
+				//\u005C
+				//input[i].contains("\u007C") || // |
+				input[i].contains("\u003F") || // ? 
+				input[i].contains("\u002A") ) // * 
+			     { 
+				System.out.println("Invalid character in output file name");
+				System.out.println("Refrain from using the following characters: \u003C \u003D \u003A \" \u002F \\ \u003F \u002A \n");
+
+
+				helpMe();
+				System.exit(0);
+			}
 				if (input[i].equalsIgnoreCase("CON") ||
 					input[i].equalsIgnoreCase("PRN") ||
 					input[i].equalsIgnoreCase("AUX") ||

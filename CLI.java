@@ -2,7 +2,6 @@ import java.io.*;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.io.File;
 
 public class CLI {
     
@@ -63,6 +62,12 @@ public class CLI {
             }
             if(order){
             	//file export
+		try {
+			htmlFile = outputFile + ".html";
+			File file = new File(htmlFile);
+			file.createNewFile();
+		} catch(IOException io) {
+			System.out.println("cannot make output file");
             	System.out.println("file export executed");
             	System.out.println(inputIndex +" "+ styleIndex+" " + outputIndex);
             	for(int i=0;i<input.length;i++){

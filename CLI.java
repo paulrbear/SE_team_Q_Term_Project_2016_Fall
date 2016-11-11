@@ -1,10 +1,9 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class CLI {
     private static void helpMe(){
-        System.out.println("this is help me");
-        File helpFile = new File("README.md");
-
+		System.out.println("this is help me");
     }
 
     private static void inputParser(String[] input){

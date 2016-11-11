@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class CLI {
     private static void helpMe(){
-		System.out.println("this is help me");
+	System.out.println("this is help me");
     }
 
     private static void inputParser(String[] input){

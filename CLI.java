@@ -3,6 +3,8 @@ import java.io.*;
 public class CLI {
     private static void helpMe(){
         System.out.println("this is help me");
+        File helpFile = new File("README.md");
+
     }
 
     private static void inputParser(String[] input){
@@ -21,7 +23,7 @@ public class CLI {
         	if(input[i].contains(".md")){
 				if(input[i].substring(input[i].length()-3, input[i].length()).equals(".md")){
         			inputFile[n]=input[i];
-        			File file = new File (inputFile[n]);
+        			File file = new File(inputFile[n]);
         			if (!file.exists()) {
         				System.out.println("File does not exist");
         				System.exit(0);

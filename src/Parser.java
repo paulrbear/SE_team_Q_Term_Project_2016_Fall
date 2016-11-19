@@ -10,8 +10,7 @@ class Parser {
 
 			while((line = bufferedReader.readLine()) != null) {
 			System.out.println(line);
-		}
-			bufferedReader.close();  
+		} bufferedReader.close();
 		} catch(IOException ex) {
 			System.out.println("Error reading file '" + Inputfile + "'"); 
 		}

@@ -5,7 +5,6 @@ public class CLI  extends Main {
 	public void inputParser(String[] input){
 		Help h = new Help( );
 		Parser p = new Parser( );
-
 		String outputFile ="";
 		//  String style;
 		int styleVariable=1;

@@ -9,7 +9,7 @@ public class Main {
 			System.exit(0);
 		}
 		if(args.length == 1){
-			if(args[0] == "help" || args[0] == "-h") {
+			if(args[0] .equals("help") || args[0] == "-h") {
 				h.help();
 				System.exit(0);
 			}

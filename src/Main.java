@@ -3,13 +3,13 @@ public class Main {
 		Help h = new Help( );
 		CLI cli = new CLI( );
 		
-		if (args.length==0) {
+		if (args.length == 0) {
 			System.out.println("No input");
 			h.help();
 			System.exit(0);
 		}
-		if(args.length==1){
-			if(args[0]=="help" || args[0]=="-h") {
+		if(args.length == 1){
+			if(args[0] == "help" || args[0] == "-h") {
 				h.help();
 				System.exit(0);
 			}

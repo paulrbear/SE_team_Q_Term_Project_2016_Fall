@@ -18,7 +18,7 @@ public class CLI  extends Main {
 		File filelist[] = new File[10];
 		int n = 0, i ;
 		
-		for(i=0;i<input.length;i++) {
+		for(i=0; i < input.length; i++) {
 			if(input[i].contains(".md")){
 				if(input[i].substring(input[i].length()-3, input[i].length()).equals(".md")){
 					filelist [n] = new File(input[i]);
@@ -111,7 +111,7 @@ public class CLI  extends Main {
 				System.exit(0);
 			}
 		}
-		if(inputIndex!=-1){
+		if(inputIndex != -1){
 			//order check
 			if (styleIndex == -1){
 				order = inputIndex < outputIndex;

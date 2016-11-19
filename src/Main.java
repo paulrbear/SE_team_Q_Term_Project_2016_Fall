@@ -2,6 +2,7 @@ public class Main {
 	public static void main(String[] args) {
 		Help h = new Help( );
 		CLI cli = new CLI( );
+		
 		if (args.length==0) {
 			System.out.println("No input");
 			h.help();

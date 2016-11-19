@@ -11,7 +11,7 @@ class Help {
 
 			// Always wrap FileReader in BufferedReader.
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
-
+			
 			while((line = bufferedReader.readLine()) != null) {
 			System.out.println(line);
 		}

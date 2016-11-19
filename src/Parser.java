@@ -1,12 +1,12 @@
 import java.io.*;
 
 class Parser {
-	public void parser(File inputFile) {
+	public void parser(File Inputfile) {
 		String line = null;
 
 		try {
 			// FileReader reads text files in the default encoding.
-			FileReader fileReader = new FileReader(inputFile);
+			FileReader fileReader = new FileReader(Inputfile);
 
 			// Always wrap FileReader in BufferedReader.
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -17,7 +17,7 @@ class Parser {
 			// Always close files.
 			bufferedReader.close();  
 		} catch(IOException ex) {
-			System.out.println("Error reading file '" + inputFile + "'"); 
+			System.out.println("Error reading file '" + Inputfile + "'"); 
 		}
 	}
 }

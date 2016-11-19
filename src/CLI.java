@@ -17,7 +17,7 @@ public class CLI  extends Main {
 		boolean order;
 		File filelist[] = new File[10];
 		int n = 0, i ;
-
+		
 		for(i=0;i<input.length;i++) {
 			if(input[i].contains(".md")){
 				if(input[i].substring(input[i].length()-3, input[i].length()).equals(".md")){

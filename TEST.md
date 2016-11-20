@@ -1,4 +1,4 @@
-abc * bold
+abc *bold*
 ==========
 
 * bold

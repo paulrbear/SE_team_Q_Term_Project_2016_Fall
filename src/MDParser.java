@@ -1,6 +1,6 @@
 import java.io.*;
 
-class Parser {
+class MDParser {
 	public void parser(File Inputfile) {
 		String line = null;
 
@@ -9,8 +9,8 @@ class Parser {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			while((line = bufferedReader.readLine()) != null) {
-			System.out.println(line);
-		} bufferedReader.close();
+				System.out.println(line);
+			} bufferedReader.close();
 		} catch(IOException ex) {
 			System.out.println("Error reading file '" + Inputfile + "'"); 
 		}

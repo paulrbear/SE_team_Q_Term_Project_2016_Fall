@@ -11,9 +11,8 @@ class Help {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			
 			while((line = bufferedReader.readLine()) != null) {
-			System.out.println(line);
-		}
-		bufferedReader.close();  
+				System.out.println(line);
+			} bufferedReader.close();  
 		} catch(IOException ex) {
 			System.out.println("Error reading file '" + file + "'"); 
 		}

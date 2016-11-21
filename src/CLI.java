@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class CLI  extends Main {
+public class CLI  {
 	public void inputParser(String[] input){
 		Help h = new Help( );
-		Parser p = new Parser( );
+		MDParser p = new MDParser( );
 		
 		String outputFile ="";
 		//  String style;

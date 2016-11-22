@@ -2,31 +2,15 @@ import java.util.ArrayList;
 
 public class Node {
 	
-	// node object¿Í mapping µÉ node typeµéÀ» ³ª¿­ÇÑ Enum list
+	// node objectì™€ mapping ë  node typeë“¤ì„ ë‚˜ì—´í•œ Enum list
 	public enum NodeType{
-		// TO-DO 
-			//implement the details
-			//add more types (´õ ÀÖÀ¸¸é..)
 		HEADER, LIST, Q_BLOCK, BLOCK, HORIZONTAL_, ORDER, UNORDER, ITEM_LIST;	
-	    static {
-	    }
 	}
 	
 	//ATTRIBUTES!!!!!
-	static ArrayList<Token> tokens; // token ¸®½ºÆ®
-	private NodeType nodeType;	// nodeÀÇ type
-	public String tempS; // divideToken methodÀÇ parameter·Î µé¾î°¡¼­ updateµÉ stringÀÌ´Ù.
-	
-	
-	
-	//OPERATIONS!!!!!!! ¹üÈ¯¿Àºü°¡ ÇÏ½Ç ºÎºĞ!! 
-	//  ÇÊ¿ä¿¡ µû¶ó parameter³ª return type ¾Ë¾Æ¼­ ¹Ù²Ù½Ã¸é µÉ °Í °°¾Æ¿ä!!¤»¤»¤»
-	public void divideToken(String s) // string s´Â °è¼Ó ¾÷µ¥ÀÌÆ® µÊ. 
-	{
-	
-		
-		tempS = ""; //»õ·Î¿î stringÀ¸·Î ¾÷µ¥ÀÌÆ®: ÃÖ±Ù¿¡ »ı¼ºµÈ tokenÀÇ stringÀÌ ³¡ ÁöÁ¡ºÎÅÍ ÀüÃ¼ string ³¡±îÁö
-	}
+	static ArrayList<Token> tokens; // token list
+	private NodeType nodeType;	// nodeì˜ type
+	public String tempS; // divideToken methodì˜ parameterë¡œ ë“¤ì–´ê°€ì„œ updateë  stringì´ë‹¤.
 	
 	public void setNodeType(NodeType nt)
 	{
@@ -37,19 +21,4 @@ public class Node {
 	{
 		return nodeType;
 	}
-
-	public Node createNode(String s)	// Node object »ı¼ºÇÏ´Â op. 
-	{
-		//TO-DO ¼öÁ¤ÇÒ°Í*
-		return new Node(); 	
-	}
-
-	
-	
-	public static void main(String[] args)
-	{
-		
-		Node node = new Node();
-	}
-
 }

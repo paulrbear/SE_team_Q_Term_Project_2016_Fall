@@ -12,7 +12,7 @@ class MDParser {
 				System.out.println(line);
 			} bufferedReader.close();
 		} catch(IOException ex) {
-			System.out.println("Error reading file '" + Inputfile + "'"); 
+			System.out.println("Error reading file '" + Inputfile ); 
 		}
 	}
 }

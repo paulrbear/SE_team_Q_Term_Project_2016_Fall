@@ -1,4 +1,4 @@
-public class Main {
+public class MDConverter{
 	public static void main(String[] args) {
 		Help h = new Help( );
 		CLI cli = new CLI( );

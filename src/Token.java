@@ -1,21 +1,15 @@
 
 public class Token {
 	
-	// Token typeµéÀ» ³ª¿­ÇÑ Enum list
+	// Token typeë“¤ì„ ë‚˜ì—´í•œ Enum list
 	public enum TokenType{
-		// TO-DO 
-			// implement the details
-			// add more types (´õ ÀÖÀ¸¸é..)
 		PLAIN, STYLE, HTML, LINK, IMAGE, ITEM_LIST, HEADER, Q_BLOCK;	
-	    static {
-	    }
 	}
 	
 	//ATTRIBUTES!!!
-	private TokenType tokenType;	// tokenÀÇ type
-	public String newString; // markdown syntax°¡ Á¦°ÅµÈ raw stringÀÌ´Ù.
+	private TokenType tokenType;	// token type
+	public String newString; 		// markdown syntaxê°€ ì œê±°ëœ raw stringì´ë‹¤.
 		
-	
 	//OPERATIONS!!!
 	public void setTokenType(TokenType tt)
 	{
@@ -27,29 +21,9 @@ public class Token {
 		return tokenType;
 	}
 
-	public void simplifyString(String s)//md syntax¸¦ ¾ø¾Ö°í(°¡°øÇÏ´Â)methodÀÌ´Ù.
+	public void simplifyString(String s)
 	{
-		// TO-DO
-			// implement the details.
+
 		newString = "";
 	}
-	
-	public Token createToken(String s)
-	{
-		// TO-DO
-			// ¼öÁ¤ÇÒ °Í.
-		return new Token();
-	}
-	
-	
-	
-	
-	
-	
-	public static void main(String[] args)
-	{
-		//TO-DO 
-		Token token = new Token();
-	}
-
 }

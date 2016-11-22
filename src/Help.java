@@ -18,7 +18,7 @@ class Help {
 					System.out.println(line);
 				} bufferedReader.close();  
 			} catch(IOException ex) {
-				System.out.println("Error reading file '" + file + "'"); 
+				System.out.println("Error reading file '" + file ); 
 			}
 		}
 	}

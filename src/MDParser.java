@@ -24,8 +24,8 @@ public class MDParser{
 	
 	
 	// testing
-//	static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
-//	static File f = new File(path);
+	static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
+	static File f = new File(path);
 	
 	
 // CONSTRUCTOR
@@ -41,25 +41,24 @@ public class MDParser{
 		prevLine = nextLine;	
 		nextLine = line;
 		
-		System.out.println("prev: " + prevLine + "\n next: " + nextLine);
+		System.out.println("\nprev: " + prevLine + "\n next: " + nextLine);
 		
 		// check if nextLine starts the node.
 		if(isStart(nextLine))
 		{
-			System.out.println("This is a start\n\n");
+			System.out.println("This is a start\n");
 			return;		// action: 현재 nodeString으로 new node 생성하고  NodeArr에 저장, nextLine은 비워진 nodeString에 저장
 		}
-		else
-			System.out.println("This is not a start\n\n");
+
+
 			
 		// check if nextLine ends the node.	
 		if(isEnd(nextLine))
 		{
-			System.out.println("This is an end\n\n");
+			System.out.println("This is an end\n");
 			return;		// action: 현재 nodeString에 자신을 더하고  그 nodeString으로 new node 생성, NodeArr에 추가.
 		}
-		else
-			System.out.println("This is not an end\n\n");
+	
 		
 	
 
@@ -137,9 +136,7 @@ public class MDParser{
 		if(count_1 == line.length() || count_2 == line.length())
 		{
 			nodeString = prevLine + line; 	// nodeString update
-			nodeType = Node.NodeType.HEADER;						// nodeType 설절
-			System.out.println("여기까지완료");
-			
+			nodeType = Node.NodeType.HEADER;						// nodeType 설절			
 			createNode(nodeString, nodeType);	// node 생성
 			return true;
 		}
@@ -158,7 +155,6 @@ public class MDParser{
 		
 		//dd it to the nodeArray in Document Object.
 		doc.nodes.add(node);
-		System.out.println("여기까지완료");
 		
 		//initialize all temp variables.
 		initializeAll();
@@ -178,7 +174,6 @@ public class MDParser{
 
 	
 	public void parser(File Inputfile) {
-		System.out.println("여기까지 들어옴\n");
 		
 		String line = null;
 		// 파일 한 줄씩 읽어서 stringList array에 저장
@@ -190,12 +185,9 @@ public class MDParser{
 			while((line = bufferedReader.readLine()) != null) 
 			{
 				stringList.add(line);
-				System.out.println("line num: " +  line.length());
 				count++;
 			} 
 			
-			
-			System.out.println("string: " + stringList.size());
 			
 			bufferedReader.close();
 		} catch(IOException ex) {
@@ -217,7 +209,7 @@ public class MDParser{
 	public static void main(String args[])
 	{
 		//testing
-		//MDParser mdp = new MDParser(f);
+		MDParser mdp = new MDParser(f);
 		
 			
 		

@@ -11,7 +11,9 @@ public class PlainVisitor extends Visitor{
 		htmlCode = htmlCode + "<html>\n";
 		CodeGenerator cg = new CodeGenerator();
 		for(int i=0;i<nodes.length;i++){
+			cg.nodeCodeGenFront(nodes[i]);
 			visitNode(nodes[i]);
+			
 		}
 		htmlCode = htmlCode + "\n</html>";
 	}

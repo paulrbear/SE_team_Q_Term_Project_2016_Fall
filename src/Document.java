@@ -5,7 +5,7 @@ public class Document {
 	
 	public ArrayList<Node> nodes;
 	
-	public void setStyle(//parameter)
+	public void setStyle()
 	{
 		
 	}

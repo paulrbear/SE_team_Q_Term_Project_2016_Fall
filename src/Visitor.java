@@ -4,10 +4,11 @@ import java.util.Iterator;
 public class Visitor {
 	public static String htmlCode ="";
 	
-	public static void visit(Node[] nodes){
+	public static void visit(ArrayList<Node> nodes){
 		// TODO generate html tag for opening html document
-		for(int i=0;i<nodes.length;i++){
-			visitNode(nodes[i]);
+		Iterator<Node> it = nodes.iterator();
+		while(it.hasNext()){
+			visitNode(it.next());
 		}
 		// TODO generate html tag for opening html document
 	}

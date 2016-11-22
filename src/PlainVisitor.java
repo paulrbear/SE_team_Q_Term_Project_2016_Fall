@@ -7,29 +7,39 @@ public class PlainVisitor extends Visitor{
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void visit(Node[] nodes){
+	public static void visit(ArrayList<Node> nodes){
 		htmlCode = htmlCode + "<html>\n";
-		CodeGenerator cg = new CodeGenerator();
+		Iterator<Node> it = nodes.iterator();
+		while(it.hasNext()){
+			visitNode(it.next());
+		}/*
 		for(int i=0;i<nodes.length;i++){
 			cg.nodeCodeGenFront(nodes[i]);
 			visitNode(nodes[i]);
-			
-		}
+			cg.nodeCodeGenBack(nodes[i]);
+		}*/
 		htmlCode = htmlCode + "\n</html>";
 	}
 	
+	protected static void visitNode(Node node){
+		CodeGenerator cg = new CodeGenerator();
+		cg.nodeCodeGenFront(node,htmlCode);
+		visitTokens(node.tokens);
+		cg.nodeCodeGenBack(node,htmlCode);
+	}
+	
 	protected static void visitTokens(ArrayList<Token> tokens){
-		// TODO generate html tag for opening node
+		
 		Iterator<Token> it = tokens.iterator();
 		while(it.hasNext()){
 			visitToken(it.next());
 		}
-		// TODO generate html tag for closing node
 	}
 	
 	protected static void visitToken(Token token) {
-		//TODO generate html tag for opening token
-		//TODO put strings between 
-		//TODO generate html tag for closing token
+		CodeGenerator cg = new CodeGenerator();
+		cg.tokenCodeGenFront(token,htmlCode);
+		htmlCode = htmlCode + token.tokenString ; 
+		cg.tokenCodeGenBack(token,htmlCode);
 	}
 }

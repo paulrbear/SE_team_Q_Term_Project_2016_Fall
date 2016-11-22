@@ -5,7 +5,6 @@
 * [paulrbear] 21200167 JooHyung Kim
 * [boomkim] 21100088 BumHwan Kim
 * [Younhong] 21400022 Younhong Ko
-<<<<<<< HEAD
 * [whaqldutk1] 21400722 Eunbee Jo
 
 
@@ -26,7 +25,7 @@
 	[ -s ] : slide style
 
  - Other Keyword(s)
- 	[ -h ]	or [ help ]: "help"; the system opens README.md file.
+ 	[ -h ]	or [ help ] : "help"; shows help text. 
 	
 
 ■ More Regulations
@@ -38,21 +37,7 @@
  4. User should provide three elements (input_filename, style, and output_filename)
  	in the order suggested.
  5. Multiple input files are separated by a white-space.
-=======
-*
->>>>>>> refs/remotes/origin/master
-
-
-#### Java Command Line Interface
-
-1. Parser
-1. Document
-1. Node
- 1. Header
- 1. Block
- 1. Quoted Block
- 1. Item List
-1. Token
- 1. Plain
- 1. Stylized Text
- 1. HTML, Code
+ 6. If file does not exist, error message comes out. 
+ 7. These characters are invalid for filename: [ < > : " / \ | ? * ]
+ 8. These strings are invalid for filename (SYSTEM regulation): [ CON, PRN, AUX, NUL ] 
+ 9. Only one option for Style is available.

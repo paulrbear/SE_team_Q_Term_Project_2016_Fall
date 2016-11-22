@@ -1,6 +1,9 @@
-
 public class Token {
-	
+	// visitor가 token class 방문
+
+
+	public String tokenString = NULL;
+
 	// Token type들을 나열한 Enum list
 	public enum TokenType{
 		PLAIN, STYLE, HTML, LINK, IMAGE, ITEM_LIST, HEADER, Q_BLOCK;	
@@ -8,7 +11,6 @@ public class Token {
 	
 	//ATTRIBUTES!!!
 	private TokenType tokenType;	// token type
-	public String newString; 		// markdown syntax가 제거된 raw string이다.
 		
 	//OPERATIONS!!!
 	public void setTokenType(TokenType tt)
@@ -16,14 +18,17 @@ public class Token {
 		this.tokenType = tt;
 	}
 	
-	public TokenType getNodeType()
+	public TokenType getTokenType()
 	{
 		return tokenType;
 	}
 
-	public void simplifyString(String s)
-	{
+	public void accept(Visitor v) {
+		v.visitToken(tokenType);
+	}
 
-		newString = "";
+	public getString( String s) {
+		tokenString = s;
+		return tokenString;
 	}
 }

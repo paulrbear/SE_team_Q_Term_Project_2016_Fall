@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public class MDParser{
 	
 // ATTRIBTUES
-
+	public enum NodeStyle{
+		H1,H2,H3,H4,H5,H6;
+	}
 	static Document doc = new Document();  //Document Object
 	public static boolean startB = false;		 
 	public static boolean endB = false;
@@ -47,7 +49,7 @@ public class MDParser{
 		if(isStart(nextLine))
 		{
 			System.out.println("This is a start\n");
-			return;		// action: ÇöÀç nodeStringÀ¸·Î new node »ý¼ºÇÏ°í  NodeArr¿¡ ÀúÀå, nextLineÀº ºñ¿öÁø nodeString¿¡ ÀúÀå
+			return;		// action: ï¿½ï¿½ï¿½ï¿½ nodeStringï¿½ï¿½ï¿½ï¿½ new node ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½  NodeArrï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, nextLineï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ nodeStringï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}
 
 
@@ -56,53 +58,53 @@ public class MDParser{
 		if(isEnd(nextLine))
 		{
 			System.out.println("This is an end\n");
-			return;		// action: ÇöÀç nodeString¿¡ ÀÚ½ÅÀ» ´õÇÏ°í  ±× nodeStringÀ¸·Î new node »ý¼º, NodeArr¿¡ Ãß°¡.
+			return;		// action: ï¿½ï¿½ï¿½ï¿½ nodeStringï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½  ï¿½ï¿½ nodeStringï¿½ï¿½ï¿½ï¿½ new node ï¿½ï¿½ï¿½ï¿½, NodeArrï¿½ï¿½ ï¿½ß°ï¿½.
 		}
 	
 		
 	
 
-			// RULES!!!!!!  ³ªÁß¿¡ ±¸ÇöÇÕ´Ï´Ù¾Æ.... 	
+			// RULES!!!!!!  ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´Ù¾ï¿½.... 	
 	
 		
 	}
 	
 	public static boolean isStart(String line)
 	{		
-		// HEADERS : #À¸·Î ½ÃÀÛÇÏ´Â headerµé
+		// HEADERS : #ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ headerï¿½ï¿½
 		if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
 					||line.startsWith("#### ")||line.startsWith("##### ")||line.startsWith("###### "))
 		{
-			// Node »ý¼º(ÀÌÀü±îÁöÀÇ  NodeStringÀ¸·Î ) 
+			// Node ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  NodeStringï¿½ï¿½ï¿½ï¿½ ) 
 			if(nodeType == null) 
 			{
 				nodeType = Node.NodeType.PLAIN;
 			}
 			createNode(nodeString, nodeType);	
 		
-			// »õ·Î¿î Node ½ÃÀÛ
+			// ï¿½ï¿½ï¿½Î¿ï¿½ Node ï¿½ï¿½ï¿½ï¿½
 			nodeString = nodeString + line; 	// nodeString update
-			nodeType = Node.NodeType.HEADER;						// nodeType ¼³Á¤
+			nodeType = Node.NodeType.HEADER;						// nodeType ï¿½ï¿½ï¿½ï¿½
 			
 			return true;
 		}
 
-		// ORDER/ UNORDER LIST: Á¦ÀÏ Ã¹ ÁÙÀÏ °æ¿ì¸¸!
+		// ORDER/ UNORDER LIST: ï¿½ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¸¸!
 		else if(prevLine == null || nodeString == null)
 		{
 			if(line.startsWith("* "))	// Unordered lists
 			{
-				createNode(nodeString, nodeType);	// node »ý¼º
+				createNode(nodeString, nodeType);	// node ï¿½ï¿½ï¿½ï¿½
 				nodeString = nodeString + line; 	// nodeString update
-				nodeType = Node.NodeType.UNORDER;						// nodeType ¼³Àý
+				nodeType = Node.NodeType.UNORDER;						// nodeType ï¿½ï¿½ï¿½ï¿½
 			}
 			else if(line.startsWith("1.")||line.startsWith("2.")||line.startsWith("3.")	// Ordered Lists
 					||line.startsWith("4.")||line.startsWith("5.")||line.startsWith("6.")
 					||line.startsWith("7.")||line.startsWith("8.")||line.startsWith("9."))
 			{
-				createNode(nodeString, nodeType);	// node »ý¼º
+				createNode(nodeString, nodeType);	// node ï¿½ï¿½ï¿½ï¿½
 				nodeString = nodeString + line; 	// nodeString update
-				nodeType = Node.NodeType.ORDER;								// nodeType ¼³Àý
+				nodeType = Node.NodeType.ORDER;								// nodeType ï¿½ï¿½ï¿½ï¿½
 			}
 			else
 			{
@@ -140,15 +142,15 @@ public class MDParser{
 		if(count_1 == line.length() || count_2 == line.length())
 		{
 			nodeString = prevLine + line; 	// nodeString update
-			nodeType = Node.NodeType.HEADER;						// nodeType ¼³Àý			
-			createNode(nodeString, nodeType);	// node »ý¼º
+			nodeType = Node.NodeType.HEADER;						// nodeType ï¿½ï¿½ï¿½ï¿½			
+			createNode(nodeString, nodeType);	// node ï¿½ï¿½ï¿½ï¿½
 			return true;
 		}
 		else
 			return false;
 	}
 	
-	// new node »ý¼º, array¿¡ Ãß°¡
+	// new node ï¿½ï¿½ï¿½ï¿½, arrayï¿½ï¿½ ï¿½ß°ï¿½
 	public static void createNode(String ns, Node.NodeType type)
 	{
 		//create Node and set its type.
@@ -180,7 +182,7 @@ public class MDParser{
 	public void parser(File Inputfile) {
 		
 		String line = null;
-		// ÆÄÀÏ ÇÑ ÁÙ¾¿ ÀÐ¾î¼­ stringList array¿¡ ÀúÀå
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù¾ï¿½ ï¿½Ð¾î¼­ stringList arrayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			FileReader fileReader = new FileReader(Inputfile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -199,7 +201,7 @@ public class MDParser{
 		}
 		
 		
-		// String array °¢ string º°·Î  parse ½ÃÀÛ
+		// String array ï¿½ï¿½ string ï¿½ï¿½ï¿½ï¿½  parse ï¿½ï¿½ï¿½ï¿½
 		for(int i = 0; i <stringList.size();i++)
 		{
 			comparePN(stringList.get(i));

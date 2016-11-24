@@ -8,7 +8,7 @@ public class Node {
 	
 	public ArrayList<Node> tokens;
 	
-	public Node(String str,String nodeStyle){
+	public Node(String str,NodesStyle nodeStyle){
 		nodeString=str;
 	}
 	// send node string to node parser for parsing into tokens.

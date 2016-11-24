@@ -1,7 +1,13 @@
+import org.w3c.tidy.Tidy;
+
 public class MDConverter{
 	public static void main(String[] args) {
 		Help h = new Help( );
 		CLI cli = new CLI( );
+		
+		Tidy tidy = new Tidy();
+		tidy.setXHML(boolean xhtml);
+		tidy.parse(inputStream, System.out);
 	
 		if (args.length == 0) {
 			System.out.println("No input");

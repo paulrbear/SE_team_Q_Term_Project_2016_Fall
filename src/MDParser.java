@@ -36,8 +36,8 @@ public class MDParser{
 */
 	
 	// testing
-	static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
-	static File f = new File(path);
+	//static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
+	//static File f = new File(path);
 	
 	
 // CONSTRUCTOR
@@ -270,6 +270,7 @@ public class MDParser{
 		}	
 	}
 	
+	/*
 	public static void main(String args[])
 	{
 		//testing
@@ -278,4 +279,5 @@ public class MDParser{
 			
 		
 	}
+	*/
 }

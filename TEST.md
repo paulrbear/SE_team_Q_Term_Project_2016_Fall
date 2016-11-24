@@ -6,6 +6,16 @@ _*text_*
 
 *_text*_
 
+asf_*text*_asf
+
+asf*_text_*asf
+
+asf_*text_*asf
+
+asf*_text*_asf
+
+
+
 
 
 1. > asdlfkjasdf

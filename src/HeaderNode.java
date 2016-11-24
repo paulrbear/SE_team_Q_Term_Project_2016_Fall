@@ -16,5 +16,8 @@ class HeaderNode extends Node{
 	public NodeStyle getStyle(){
 		return nodeStyle;
 	}
+	public void accept(Visitor v){
+		v.visitHeaderNode(this);
+	}
 
 }

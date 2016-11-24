@@ -1,45 +1,56 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PlainVisitor extends Visitor{
-
-	public PlainVisitor() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public static void visit(ArrayList<Node> nodes){
-		htmlCode = htmlCode + "<html>\n";
-		Iterator<Node> it = nodes.iterator();
-		while(it.hasNext()){
-			visitNode(it.next());
-		}/*
-		for(int i=0;i<nodes.length;i++){
-			cg.nodeCodeGenFront(nodes[i]);
-			visitNode(nodes[i]);
-			cg.nodeCodeGenBack(nodes[i]);
-		}*/
-		htmlCode = htmlCode + "\n</html>";
-	}
+public class PlainVisitor implements Visitor{
 	
-	protected static void visitNode(Node node){
-		CodeGenerator cg = new CodeGenerator();
-		cg.nodeCodeGenFront(node,htmlCode);
-		visitTokens(node.tokens);
-		cg.nodeCodeGenBack(node,htmlCode);
+	static String htmlCode = "<html>\n<body>";
+	public String getDocument(){
+		return htmlCode + "</body>\n</html>";
 	}
-	
-	protected static void visitTokens(ArrayList<Token> tokens){
-		
-		Iterator<Token> it = tokens.iterator();
-		while(it.hasNext()){
-			visitToken(it.next());
+
+	@Override
+	public void visitHeaderNode(HeaderNode node) {
+		Iterator<Node> it = node.tokens.iterator();
+		switch(node.nodeStyle){
+		case H1:
+			htmlCode = htmlCode + "<h1>";
+			while(it.hasNext())	it.next().accept(this);
+			htmlCode = htmlCode + "</h1>";
+			break;
+		case H2:
+			htmlCode = htmlCode + "<h2>";
+			while(it.hasNext())	it.next().accept(this);
+			htmlCode = htmlCode + "</h2>";
+			break;
+		case H3:
+			htmlCode = htmlCode + "<h3>";
+			while(it.hasNext())	it.next().accept(this);
+			htmlCode = htmlCode + "</h3>";
+			break;
+		case H4:
+			htmlCode = htmlCode + "<h4>";
+			while(it.hasNext())	it.next().accept(this);
+			htmlCode = htmlCode + "</h4>";
+			break;
+		case H5:
+			htmlCode = htmlCode + "<h5>";
+			while(it.hasNext())	it.next().accept(this);
+			htmlCode = htmlCode + "</h5>";
+			break;
+		case H6:
+			htmlCode = htmlCode + "<h6>";
+			while(it.hasNext())	it.next().accept(this);
+			htmlCode = htmlCode + "</h6>";
+			break;
+		default:
+			System.out.println("error!!");
+			break;
 		}
 	}
-	
-	protected static void visitToken(Token token) {
-		CodeGenerator cg = new CodeGenerator();
-		cg.tokenCodeGenFront(token,htmlCode);
-		htmlCode = htmlCode + token.tokenString ; 
-		cg.tokenCodeGenBack(token,htmlCode);
+
+	public void visitBoldToken(BoldToken bt) {
+		// TODO Auto-generated method stub
+		
 	}
+	
 }

@@ -9,7 +9,7 @@ public class Node {
 	
 	// node object와 mapping 될 node type들을 나열한 Enum list
 	public enum NodeType {
-		HEADER, LIST, QBLOCK, BLOCK, HORIZONTAL, ITEM_LIST;	
+		HEADER, LIST, QBLOCK, BLOCK, HORIZONTAL, ITEM_LIST, PLAIN;	
 	}
 
 	//ATTRIBUTES!!!!!

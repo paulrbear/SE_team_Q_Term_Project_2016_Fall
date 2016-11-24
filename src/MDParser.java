@@ -9,6 +9,12 @@ public class MDParser{
 	
 // ATTRIBTUES
 
+	enum NodeType
+	{
+		PLAIN, HEADER, Q_BLOCK, LIST, BLOCK;	
+	}
+	
+	
 	static Document doc = new Document();  //Document Object
 	public static boolean startB = false;		 
 	public static boolean endB = false;
@@ -20,8 +26,14 @@ public class MDParser{
 	public static String curLine = null;
 	public static String nextLine = null;
 	public static String prevLine = null;
-	public static Node.NodeType nodeType = null;
-
+	
+	
+	// Node Sytle attributes
+	public static HeaderNode.NodeStyle nstyle;
+/*	public static ListNode.ListNode nstyle;
+	public static HeaderNode.NodeStyle nstyle;
+	public static HeaderNode.NodeStyle nstyle;
+*/
 	
 	// testing
 	static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
@@ -66,6 +78,7 @@ public class MDParser{
 	
 		
 	}
+
 	
 	public static boolean isStart(String line)
 	{		
@@ -73,21 +86,26 @@ public class MDParser{
 		if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
 					||line.startsWith("#### ")||line.startsWith("##### ")||line.startsWith("###### "))
 		{
-			// Node 생성(이전까지의  NodeString으로 ) 
-			if(nodeType == null) 
-			{
-				nodeType = Node.NodeType.PLAIN;
-			}
-			createNode(nodeString, nodeType);	
-		
+				
+			// Node 생성(이전까지의  NodeString으로 ) 		
+			int hnum = HeaderNum(line, '#');			
+			nstyle = HeaderNode.NodeStyle.values()[hnum];
+			
+			
+			System.out.println("hn: " + hnum + ", and nstyle : " + nstyle);
+			
+			Node node = new HeaderNode(line,nstyle);
+			
+			// Array에 추가
+			doc.nodes.add((Node)node);
+			
 			// 새로운 Node 시작
 			nodeString = nodeString + line; 	// nodeString update
-			nodeType = Node.NodeType.HEADER;						// nodeType 설정
 			
 			return true;
 		}
 
-		// ORDER/UNORDER LIST: 제일 첫 줄일 경우만!
+	/*	// ORDER/UNORDER LIST: 제일 첫 줄일 경우만!
 		else if(prevLine == null || nodeString == null)
 		{
 			if(line.startsWith("* "))	// Unordered lists
@@ -110,6 +128,8 @@ public class MDParser{
 			}
 			return true;
 		}
+		
+		*/
 		else
 			return false;
 
@@ -125,7 +145,6 @@ public class MDParser{
 		{
 			if(line.charAt(i) == '=')
 			{
-				
 				count_1++;
 			}
 		}
@@ -139,16 +158,49 @@ public class MDParser{
 		}
 		if(count_1 == line.length() || count_2 == line.length())
 		{
-			nodeString = prevLine + line; 	// nodeString update
-			nodeType = Node.NodeType.HEADER;						// nodeType 설절			
-			createNode(nodeString, nodeType);	// node 생성
+			if(count_1 == line.length()) // '='
+			{
+				nstyle = HeaderNode.NodeStyle.values()[0];
+				
+			}
+			else if(count_2 == line.length())
+			{
+				nstyle = HeaderNode.NodeStyle.values()[1];
+			}
+			
+			// Node 생성		
+			nodeString = prevLine + line; 	// nodeString update			
+			Node node = new HeaderNode(line,nstyle);
+			
+			// Array에 추가
+			doc.nodes.add((Node)node);
+			
 			return true;
 		}
 		else
 			return false;
 	}
+	public static int HeaderNum( String s, char c ) // 
+	  {
+	    int counter = 0;
+	    boolean foundOne = false;
+	    for( int i = 0; i < s.length(); i++)
+	    {
+	      if( s.charAt(i) == c )
+	      {
+	        counter += 1;
+	        foundOne = true;
+	      }
+	      else {
+	        if(foundOne) break;
+	      }
+	    }
+	    return counter;
+	  }
 	
-	// new node 생성, array에 추가
+	
+	
+/*	// new node 생성, array에 추가
 	public static void createNode(String ns, Node.NodeType type)
 	{
 		//create Node and set its type.
@@ -175,7 +227,7 @@ public class MDParser{
 		prevLine = null;
 		nodeType = null;
 	}
-
+*/
 	
 	public void parser(File Inputfile) {
 		

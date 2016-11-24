@@ -1,4 +1,4 @@
-one_*text -*one
+one_*text _*one
 
 _*text*_
 

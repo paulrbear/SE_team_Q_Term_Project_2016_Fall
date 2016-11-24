@@ -2,7 +2,7 @@ public class Node {
 	// class 이름이 nodeParser이라 가정
 	nodeParser np = new nodeParser();
 
-	public String nodeString = NULL;
+	public String nodeString = "";
 
 	// visitor가 node class 방문
 	public void accept(Visitor v) {}
@@ -23,7 +23,7 @@ public class Node {
 	public NodeType getNodeType() {
 		return nodeType;
 	}
-	public getString(String s) {
+	public String getString(String s) {
 		nodeString = s;
 		return nodeString;
 	}

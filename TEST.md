@@ -2,7 +2,7 @@ _*text*_
 
 *_text_*
 
--*text_*
+_*text_*
 
 *_text*_
 

@@ -21,7 +21,7 @@ public class MDParser{
 	public static String nextLine = null;
 	public static String prevLine = null;
 	public static Node.NodeType nodeType = null;
-	
+
 	
 	// testing
 	static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
@@ -87,7 +87,7 @@ public class MDParser{
 			return true;
 		}
 
-		// ORDER/ UNORDER LIST: 力老 霉 临老 版快父!
+		// ORDER/UNORDER LIST: 力老 霉 临老 版快父!
 		else if(prevLine == null || nodeString == null)
 		{
 			if(line.startsWith("* "))	// Unordered lists
@@ -203,11 +203,7 @@ public class MDParser{
 		for(int i = 0; i <stringList.size();i++)
 		{
 			comparePN(stringList.get(i));
-		}
-		
-		
-		
-		
+		}	
 	}
 	
 	public static void main(String args[])

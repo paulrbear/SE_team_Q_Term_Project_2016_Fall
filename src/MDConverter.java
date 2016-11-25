@@ -16,6 +16,6 @@ public class MDConverter{
 		}
 		System.out.println("before input Parser");
 		cli.inputParser(args);
-		cli.fileWrite(cli.p.getHTML(),cli.outputFile);
+		//cli.fileWrite(cli.p.getHTML(),cli.outputFile);
 	}
 }

@@ -1,15 +1,16 @@
 import java.io.*;
-import java.util.*;
-import org.w3c.tidy.Tidy;
+
 
 public class CLI  {
 	public String outputFile ="";
 	MDParser p = new MDParser( );
-
 	public void inputParser(String[] input){
 		Help h = new Help( );
-	
+		
+		
+		
 		//  String style;
+		@SuppressWarnings("unused")
 		int styleVariable=1;
 		int inputIndex=-1;
 		int outputIndex=-1;
@@ -145,9 +146,9 @@ public class CLI  {
 	 			System.out.println("Syntax Error : [inputFileName], [style], [outputFileNmae]");
 			}
 		}
-		for (i = 0; i < filelist.length; i++) {
-			p.parser(filelist[i]);
-		}
+		//for (i = 0; i < filelist.length; i++) {
+			p.parser(filelist[0]);
+		//}
 	}
 	
 	public void fileWrite(String HTMLCode,String fileName){
@@ -158,16 +159,8 @@ public class CLI  {
 		      out.close();
 		      ////////////////////////////////////////////////////////////////
 		    } catch (IOException e) {
-		        System.err.println(e);
+		        System.err.println(e); // 에러가 있다면 메시지 출력
 		        System.exit(1);
 		    }
-		    isValid(HTMLCode);
-	}
-	
-	private boolean isValid(String htmlString){
-		Tidy tidy = new Tidy();
-		InputStream stream = new ByteArrayInputStream(htmlString.getBytes());
-		tidy.parse(stream, System.out);
-		return (tidy.getParseErrors() == 0);
 	}
 }

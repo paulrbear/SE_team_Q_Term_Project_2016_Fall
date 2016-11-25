@@ -1,4 +1,4 @@
-import java.awt.List;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;;
 
+@SuppressWarnings("unused")
 public class MDParser{
 	
 // ATTRIBTUES
@@ -63,13 +64,15 @@ public class MDParser{
 		if(isStart(nextLine))
 		{
 			startB = true;
+				
+			// action: ���� nodeString���� new node �����ϰ�  NodeArr�� ����, nextLine�� ����� nodeString�� ����
 		}
 		System.out.println("1");
 		// check if nextLine ends the node.	
 		if(isEnd(nextLine))
 		{
 			endB = true;
-			return;
+			return;		// action: ���� nodeString�� �ڽ��� ���ϰ�  �� nodeString���� new node ����, NodeArr�� �߰�.
 		}
 		else
 		{
@@ -116,7 +119,7 @@ public class MDParser{
 		
 			
 		
-	/*	// ORDER/UNORDER LIST
+	/*	// ORDER/UNORDER LIST: ���� ù ���� ��츸!
 		else if(prevLine == null || nodeString == null)
 		{
 			if(line.startsWith("* "))	// Unordered lists
@@ -242,7 +245,7 @@ public class MDParser{
 	*/
 			//initialize all temp variables.
 		
-		System.out.println("        :\n" + s);
+		System.out.println("��� ����:\n" + s);
 	//	initializeAll();
 	}
 	
@@ -253,7 +256,7 @@ public class MDParser{
 		HeaderNode node;
 		node = new HeaderNode(s, hs);
 		doc.nodes.add(node);
-		System.out.println("        :\n" + s);
+		System.out.println("��� ����:\n" + s);
 		
 		//initialize all temp variables.
 		initializeAll();
@@ -276,7 +279,7 @@ public class MDParser{
 	public void parser(File Inputfile) {
 		
 		String bufferLine = "";
-		// stringList array�� ����
+		// ���� �� �پ� �о stringList array�� ����
 		try {
 			FileReader fileReader = new FileReader(Inputfile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -287,7 +290,7 @@ public class MDParser{
 				stringList.add(bufferLine);
 				System.out.println(bufferLine);
 				count++;
-			} 
+			}
 			bufferedReader.close();
 		} catch(IOException ex) {
 			System.out.println("Error reading file '" + Inputfile ); 
@@ -300,7 +303,7 @@ public class MDParser{
 			comparePN(stringList.get(i));
 		}
 		System.out.println("after comparePN");
-		callVisitor();
+		//callVisitor();
 	}
 	
 	public static void callVisitor(){
@@ -325,7 +328,7 @@ public class MDParser{
 		      out.close();
 		      ////////////////////////////////////////////////////////////////
 		    } catch (IOException e) {
-		        System.err.println(e); 
+		        System.err.println(e); // 에러가 있다면 메시지 출력
 		        System.exit(1);
 		    }
 	}

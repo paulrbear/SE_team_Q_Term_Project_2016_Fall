@@ -21,23 +21,23 @@ public class MDParser{
 	
 	public static ArrayList<String> stringList = new ArrayList<>();
 	
-	// temporary variables 
-	public static String nodeString = null;
-	public static String curLine = null;
-	public static String nextLine = null;
-	public static String prevLine = null;
+	// temporary variables
+	public static String nodeString = "";
+	public static String curLine = "";
+	public static String nextLine = "";
+	public static String prevLine = "";
 	public static NodeType ntype = NodeType.BLOCK; // default.
 	
 	// Node Sytle attributes
-	public static HeaderNode.NodeStyle hStyle;
+	public static HeaderNode.NodeStyle hStyle = null;
 /*	public static ListNode.ListNode nstyle;
 	public static HeaderNode.NodeStyle nstyle;
 	public static HeaderNode.NodeStyle nstyle;
 */
 	
 	// testing
-	//static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
-	//static File f = new File(path);
+	static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
+	static File f = new File(path);
 	
 	
 // CONSTRUCTOR
@@ -50,61 +50,79 @@ public class MDParser{
 	public static void comparePN(String line)
 	{
 		// update.
-		prevLine = nextLine;	
+		nodeString = nodeString + prevLine + "\n";
 		nextLine = line;
 		
-		System.out.println("\nprev: " + prevLine + "\n next: " + nextLine);
+		//System.out.println("p: "+ prevLine + ", n: " + nextLine);
 		
 		// check if nextLine starts the node.
+
 		if(isStart(nextLine))
 		{
-			System.out.println("This is a start\n");
-			return;		// action: 현재 nodeString으로 new node 생성하고  NodeArr에 저장, nextLine은 비워진 nodeString에 저장
-		}
-
-
-			
+			startB = true;
+			prevLine = nextLine;
+			// action: 현재 nodeString으로 new node 생성하고  NodeArr에 저장, nextLine은 비워진 nodeString에 저장
+		}	
 		// check if nextLine ends the node.	
 		if(isEnd(nextLine))
 		{
-			System.out.println("This is an end\n");
+			endB = true;
 			return;		// action: 현재 nodeString에 자신을 더하고  그 nodeString으로 new node 생성, NodeArr에 추가.
 		}
-	
-		
-	
-
-	// RULES!!!!!!  나중에 구현합니다아.... 	
+		else
+		{
+			prevLine = nextLine;
+		}
+			// RULES 	
 		// blank line
 	//	if(line.trim().isEmpty())
 		//{
 	//		nodeString
 	//	}
 		
+		
 	}
 
 	
 	public static boolean isStart(String line)
 	{		
-		// HEADERS : #으로 시작하는 header들
+		
+   	    // HEADERS : #으로 시작하는 header들
 		if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
 					||line.startsWith("#### ")||line.startsWith("##### ")||line.startsWith("###### "))
 		{
-		
-			// Node 생성(이전까지의  NodeString으로 ) 		
+			// create a node with buffered string previous to this line.
+			if(!(nodeString.trim().isEmpty()))
+			{
+				createNode(nodeString, ntype);
+			}
+			else
+			{
+				c
+			}
+			
+			
+			
+			// Node 생성(이전까지의  NodeString으로 ) 
 			createNode(nodeString, ntype);
 			
-	
-			// String 가공 완료 (header syntax 떼어냄)
-			ntype = NodeType.HEADER;
-			int hnum = HeaderNum(line, '#');			
-			hStyle = HeaderNode.NodeStyle.values()[hnum - 1]; 
-			nodeString = line.substring(hnum + 1) + "\n"; 	// nodeString update
-			
-			
+			// Setting
+			ntype = NodeType.HEADER;			
+			System.out.println("start: header");
 			return true;
 		}
+		// Plain text
+		else if(prevLine=="" && ntype == NodeType.BLOCK)
+		{
+			nodeString = line + "\n";
+	
 
+			System.out.println("start: plain - " + nodeString);
+			return true;
+		}
+		
+			
+		
 	/*	// ORDER/UNORDER LIST: 제일 첫 줄일 경우만!
 		else if(prevLine == null || nodeString == null)
 		{
@@ -138,53 +156,61 @@ public class MDParser{
 	
 	public static boolean isEnd(String line)
 	{
-		int count_1 = 0; //counts '='
-		int count_2 = 0; //counts '-'
-
-		for(int i =0; i < line.length(); i++)
-		{
-			if(line.charAt(i) == '=')
-			{
-				count_1++;
-			}
-		}
+		int h1 = 0, h2 = 0;
+	//	boolean sym = false;
 		
-		for(int i =0; i < line.length(); i++)
+		if((!line.trim().isEmpty()) && line.charAt(0)== '=')
 		{
-			if(line.charAt(i) == '-')
+			for(h1 =0; h1 < line.length(); h1++)
 			{
-				count_2++;
+				if(line.charAt(h1) != '=')
+				{
+					break;
+				}
+			}			
+			
+			if(h1 == line.length())
+			{
+				System.out.println("end: h1");
+				hStyle = HeaderNode.NodeStyle.values()[0];
 			}
 		}
-		if(count_1 == line.length() || count_2 == line.length())
+		else if((!line.trim().isEmpty()) && line.charAt(0)== '-')
 		{
-			if(count_1 == line.length()) // '='
+			for(h2 = 0; h2 < line.length(); h2++)
 			{
-				hStyle = HeaderNode.NodeStyle.values()[0];
-				
-			}
-			else if(count_2 == line.length())
+				if(line.charAt(h2) != '-')
+				{
+					break;
+				}
+			}	
+			
+			if(h2 == line.length())
 			{
+				System.out.println("end: h2");
 				hStyle = HeaderNode.NodeStyle.values()[1];
 			}
-			
-			
+		}
+	
+		if(hStyle != null)
+		{
 			// Node 생성		
-			nodeString = prevLine +"\n"; 	// nodeString update				
+			nodeString = prevLine +"\n"; 	// nodeString update	
 			createNode(nodeString, NodeType.HEADER);
 		
 			return true;
 		}
-		else if(hStyle != null)
+		else
 		{
-			System.out.println("this end");
-		}
+			System.out.println("not end -" + nodeString + "string끝");
 			return false;
+
+		}
+
 	}
 	
 	
-	
-	public static int HeaderNum( String s, char c ) // # 개수세는 method
+	public static int HeaderNum( String s, HeaderNode.NodeStyle ns ) // # 개수세는 method
 	  {
 	    int counter = 0;
 	    boolean foundOne = false;
@@ -203,60 +229,60 @@ public class MDParser{
 	  }
 	
 	
+
+// CREATE NODE methods :
+	public static void createNode(String s)
+	{
+		//create Node and set its type.
+	/*	Node node;
+		node = new PlainNode(ns);
+			doc.nodes.add(node);
+	*/
+			//initialize all temp variables.
+		initializeAll();
+	}
 	
-	// new node 생성, array에 추가
-	public static void createNode(String ns, NodeType type)
+	// header node
+	public static void createNode(String ns, HeaderNode.NodeStyle hStyle)
 	{
 		//create Node and set its type.
 		Node node;
-		if(type.ordinal() == 1) // header
-		{
-			node = new HeaderNode(ns, hStyle);
-			doc.nodes.add(node);
-		}
-		else
-		{
-		//	node = new BlockNode(ns);
-		}
-		
-		System.out.println("node :" + ns);
-		
+		node = new HeaderNode(ns, hStyle);
+		doc.nodes.add(node);
 		
 		//initialize all temp variables.
 		initializeAll();
 	}
+	
 	
 	// Flush method. Empty all temps.
 	public static void initializeAll()
 	{
 		startB = false;
 		endB = false;
-		nodeString = null;
-		curLine = null;
-		nextLine = null;
-		prevLine = null;
+		nodeString = "";
+		curLine = "";
+		nextLine = "";
+		prevLine = "";
 		ntype = NodeType.BLOCK;
 		hStyle = null;
 	}
-
 	
 	public void parser(File Inputfile) {
 		
-		String line = null;
+		String bufferLine = "";
 		// 파일 한 줄씩 읽어서 stringList array에 저장
 		try {
 			FileReader fileReader = new FileReader(Inputfile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			int count = 0;
-			while((line = bufferedReader.readLine()) != null) 
+			while((bufferLine = bufferedReader.readLine()) != null) 
 			{
-				stringList.add(line);
+				stringList.add(bufferLine);
+				//System.out.println("line: " + bufferLine );
 				count++;
 			} 
-			
-			
-			
 			bufferedReader.close();
 		} catch(IOException ex) {
 			System.out.println("Error reading file '" + Inputfile ); 
@@ -267,10 +293,10 @@ public class MDParser{
 		for(int i = 0; i <stringList.size();i++)
 		{
 			comparePN(stringList.get(i));
+			
 		}	
 	}
 	
-	/*
 	public static void main(String args[])
 	{
 		//testing
@@ -279,5 +305,4 @@ public class MDParser{
 			
 		
 	}
-	*/
 }

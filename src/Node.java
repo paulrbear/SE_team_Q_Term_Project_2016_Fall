@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 
 public class Node implements nodeInterface{
-	// class 이름이 nodeParser이라 가정
 	
 	public String nodeString;
 	

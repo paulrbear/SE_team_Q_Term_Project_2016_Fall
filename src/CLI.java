@@ -148,10 +148,6 @@ public class CLI  {
 		for (i = 0; i < filelist.length; i++) {
 			p.parser(filelist[i]);
 		}
-		if (isValid(htmlString) )
-			System.out.println("Converted successfully");
-		else
-			System.out.println("There are few errors left");
 	}
 	
 	public void fileWrite(String HTMLCode,String fileName){
@@ -162,12 +158,12 @@ public class CLI  {
 		      out.close();
 		      ////////////////////////////////////////////////////////////////
 		    } catch (IOException e) {
-		        System.err.println(e); // 에러가 있다면 메시지 출력
+		        System.err.println(e);
 		        System.exit(1);
 		    }
+		    isValid(HTMLCode);
 	}
-
-	public String htmlcode = "";
+	
 	private boolean isValid(String htmlString){
 		Tidy tidy = new Tidy();
 		InputStream stream = new ByteArrayInputStream(htmlString.getBytes());

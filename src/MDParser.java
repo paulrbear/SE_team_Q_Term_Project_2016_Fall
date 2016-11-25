@@ -63,15 +63,13 @@ public class MDParser{
 		if(isStart(nextLine))
 		{
 			startB = true;
-				
-			// action: ���� nodeString���� new node �����ϰ�  NodeArr�� ����, nextLine�� ����� nodeString�� ����
 		}
 		System.out.println("1");
 		// check if nextLine ends the node.	
 		if(isEnd(nextLine))
 		{
 			endB = true;
-			return;		// action: ���� nodeString�� �ڽ��� ���ϰ�  �� nodeString���� new node ����, NodeArr�� �߰�.
+			return;
 		}
 		else
 		{
@@ -118,7 +116,7 @@ public class MDParser{
 		
 			
 		
-	/*	// ORDER/UNORDER LIST: ���� ù ���� ��츸!
+	/*	// ORDER/UNORDER LIST
 		else if(prevLine == null || nodeString == null)
 		{
 			if(line.startsWith("* "))	// Unordered lists
@@ -244,7 +242,7 @@ public class MDParser{
 	*/
 			//initialize all temp variables.
 		
-		System.out.println("��� ����:\n" + s);
+		System.out.println("        :\n" + s);
 	//	initializeAll();
 	}
 	
@@ -255,7 +253,7 @@ public class MDParser{
 		HeaderNode node;
 		node = new HeaderNode(s, hs);
 		doc.nodes.add(node);
-		System.out.println("��� ����:\n" + s);
+		System.out.println("        :\n" + s);
 		
 		//initialize all temp variables.
 		initializeAll();
@@ -278,7 +276,7 @@ public class MDParser{
 	public void parser(File Inputfile) {
 		
 		String bufferLine = "";
-		// ���� �� �پ� �о stringList array�� ����
+		// stringList array�� ����
 		try {
 			FileReader fileReader = new FileReader(Inputfile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -327,7 +325,7 @@ public class MDParser{
 		      out.close();
 		      ////////////////////////////////////////////////////////////////
 		    } catch (IOException e) {
-		        System.err.println(e); // 에러가 있다면 메시지 출력
+		        System.err.println(e); 
 		        System.exit(1);
 		    }
 	}

@@ -8,7 +8,7 @@ class HeaderNode extends Node{
 	public HeaderNode(String str,NodeStyle style){
 		nodeString = str;
 		setStyle(style);
-		nodeParse();
+		//nodeParse();
 	}
 	public void setStyle(NodeStyle style){
 		nodeStyle= style;

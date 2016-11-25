@@ -1,14 +1,14 @@
-import org.w3c.tidy.Tidy;
+//import org.w3c.tidy.Tidy;
 
 public class MDConverter{
 	public static void main(String[] args) {
 		Help h = new Help( );
 		CLI cli = new CLI( );
-		
+/*		
 		Tidy tidy = new Tidy();
 		tidy.setXHML(boolean xhtml);
 		tidy.parse(inputStream, System.out);
-	
+*/	
 		if (args.length == 0) {
 			System.out.println("No input");
 			h.help();
@@ -20,6 +20,8 @@ public class MDConverter{
 				System.exit(0);
 			}
 		}
+		System.out.println("before input Parser");
 		cli.inputParser(args);
+		cli.fileWrite(cli.p.getHTML(),cli.outputFile);
 	}
 }

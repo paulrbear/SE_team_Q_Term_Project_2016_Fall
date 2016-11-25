@@ -1,9 +1,12 @@
 import java.awt.List;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;;
 
 public class MDParser{
 	
@@ -14,8 +17,8 @@ public class MDParser{
 		PLAIN, HEADER, Q_BLOCK, LIST, BLOCK;	
 	}
 
-	
-	static Document doc = new Document();  //Document Object
+	public static PlainVisitor v;
+	public static Document doc = new Document();  //Document Object
 	public static boolean startB = false;		 
 	public static boolean endB = false;
 	
@@ -36,17 +39,21 @@ public class MDParser{
 */
 	
 	// testing
-	static String path;
-	static File f = new File(path);
+//	static String path;
+//	static File f = new File(path);
 	
 	
 // CONSTRUCTOR
+	public MDParser() {
+		// TODO Auto-generated constructor stub
+	}
 	public MDParser(File file)
 	{
 		parser(file);
 	}
 // OPERATIONS 
 	
+
 	public static void comparePN(String line)
 	{
 
@@ -57,13 +64,14 @@ public class MDParser{
 		{
 			startB = true;
 				
-			// action: ÇöÀç nodeStringÀ¸·Î new node »ı¼ºÇÏ°í  NodeArr¿¡ ÀúÀå, nextLineÀº ºñ¿öÁø nodeString¿¡ ÀúÀå
-		}	
+			// action: ï¿½ï¿½ï¿½ï¿½ nodeStringï¿½ï¿½ï¿½ï¿½ new node ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½  NodeArrï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, nextLineï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ nodeStringï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		}
+		System.out.println("1");
 		// check if nextLine ends the node.	
 		if(isEnd(nextLine))
 		{
 			endB = true;
-			return;		// action: ÇöÀç nodeString¿¡ ÀÚ½ÅÀ» ´õÇÏ°í  ±× nodeStringÀ¸·Î new node »ı¼º, NodeArr¿¡ Ãß°¡.
+			return;		// action: ï¿½ï¿½ï¿½ï¿½ nodeStringï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½  ï¿½ï¿½ nodeStringï¿½ï¿½ï¿½ï¿½ new node ï¿½ï¿½ï¿½ï¿½, NodeArrï¿½ï¿½ ï¿½ß°ï¿½.
 		}
 		else
 		{
@@ -85,7 +93,7 @@ public class MDParser{
 	public static boolean isStart(String line)
 	{		
 		
-   	    // HEADERS : #À¸·Î ½ÃÀÛÇÏ´Â headerµé
+   	    // HEADERS : #ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ headerï¿½ï¿½
 		if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
 					||line.startsWith("#### ")||line.startsWith("##### ")||line.startsWith("###### "))
 		{
@@ -110,21 +118,21 @@ public class MDParser{
 		
 			
 		
-	/*	// ORDER/UNORDER LIST: Á¦ÀÏ Ã¹ ÁÙÀÏ °æ¿ì¸¸!
+	/*	// ORDER/UNORDER LIST: ï¿½ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¸¸!
 		else if(prevLine == null || nodeString == null)
 		{
 			if(line.startsWith("* "))	// Unordered lists
 			{
-				createNode(nodeString, nodeType);	// node »ı¼º
+				createNode(nodeString, nodeType);	// node ï¿½ï¿½ï¿½ï¿½
 				nodeString = nodeString + line; 	// nodeString update
-				nodeType = Node.NodeType.UNORDER;						// nodeType ¼³Àı
+				nodeType = Node.NodeType.UNORDER;						// nodeType ï¿½ï¿½ï¿½ï¿½
 			}
 			else if(line.startsWith("1.")||line.startsWith("2.")||line.startsWith("3.")	// Ordered Lists
 					||line.startsWith("4.")||line.startsWith("5.")||line.startsWith("6.")
 					||line.startsWith("7.")||line.startsWith("8.")||line.startsWith("9."))
 			{
 				nodeString = nodeString + line; 	// nodeString update
-				nodeType = Node.NodeType.ORDER;								// nodeType ¼³Àı
+				nodeType = Node.NodeType.ORDER;								// nodeType ï¿½ï¿½ï¿½ï¿½
 			}
 			else
 			{
@@ -160,7 +168,7 @@ public class MDParser{
 			{
 				hStyle = HeaderNode.NodeStyle.values()[0];
 
-				// Node »ı¼º		
+				// Node ï¿½ï¿½ï¿½ï¿½		
 				nodeString = prevLine +"\n"; 	// nodeString update	
 				createNode(nodeString, HeaderNode.NodeStyle.H1);
 			}
@@ -181,7 +189,7 @@ public class MDParser{
 			{
 				hStyle = HeaderNode.NodeStyle.values()[1];
 				
-				// Node »ı¼º		
+				// Node ï¿½ï¿½ï¿½ï¿½		
 				nodeString = prevLine +"\n"; 	// nodeString update	
 				createNode(nodeString, HeaderNode.NodeStyle.H2);
 			}
@@ -190,13 +198,13 @@ public class MDParser{
 		}
 		else if(ntype == NodeType.HEADER && line.startsWith("#"))
 		{
-			// string °¡°ø
+			// string ï¿½ï¿½ï¿½ï¿½
 			int hnum = HeaderNum(line, '#');
 			hStyle = HeaderNode.NodeStyle.values()[hnum - 1];
 		
 			line = line.substring(hnum + 1);
 		
-			// node »ı¼º
+			// node ï¿½ï¿½ï¿½ï¿½
 			createNode(line, hStyle);
 			
 			return true;
@@ -206,7 +214,7 @@ public class MDParser{
 	}
 	
 	
-	public static int HeaderNum(String s, char c) // # °³¼ö¼¼´Â method
+	public static int HeaderNum(String s, char c) // # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ method
 	  {
 	    int counter = 0;
 	    boolean foundOne = false;
@@ -236,7 +244,7 @@ public class MDParser{
 	*/
 			//initialize all temp variables.
 		
-		System.out.println("³ëµå »ı¼º:\n" + s);
+		System.out.println("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½:\n" + s);
 	//	initializeAll();
 	}
 	
@@ -244,10 +252,10 @@ public class MDParser{
 	public static void createNode(String s, HeaderNode.NodeStyle hs)
 	{
 		//create Node and set its type.
-		Node node;
+		HeaderNode node;
 		node = new HeaderNode(s, hs);
 		doc.nodes.add(node);
-		System.out.println("³ëµå »ı¼º:\n" + s);
+		System.out.println("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½:\n" + s);
 		
 		//initialize all temp variables.
 		initializeAll();
@@ -270,7 +278,7 @@ public class MDParser{
 	public void parser(File Inputfile) {
 		
 		String bufferLine = "";
-		// ÆÄÀÏ ÇÑ ÁÙ¾¿ ÀĞ¾î¼­ stringList array¿¡ ÀúÀå
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù¾ï¿½ ï¿½Ğ¾î¼­ stringList arrayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			FileReader fileReader = new FileReader(Inputfile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -279,6 +287,7 @@ public class MDParser{
 			while((bufferLine = bufferedReader.readLine()) != null) 
 			{
 				stringList.add(bufferLine);
+				System.out.println(bufferLine);
 				count++;
 			} 
 			bufferedReader.close();
@@ -286,19 +295,49 @@ public class MDParser{
 			System.out.println("Error reading file '" + Inputfile ); 
 		}
 		
-		
-		// String array °¢ string º°·Î  parse ½ÃÀÛ
+		System.out.println("before comparePN");
+		// String array ï¿½ï¿½ string ï¿½ï¿½ï¿½ï¿½  parse ï¿½ï¿½ï¿½ï¿½
 		for(int i = 0; i <stringList.size();i++)
 		{
 			comparePN(stringList.get(i));
-			
-		}	
+		}
+		System.out.println("after comparePN");
+		callVisitor();
 	}
 	
+	public static void callVisitor(){
+		Iterator<Node> it = doc.nodes.iterator();
+		while(it.hasNext()){
+			it.next().accept(v);
+		}
+	}
+	
+	public Visitor getVisitor(){
+		return v;
+	}
+	public String getHTML(){
+		return v.getDocument();
+	}
+	/*
+	public void fileWrite(String str){
+		try {
+		      ////////////////////////////////////////////////////////////////
+		      BufferedWriter out = new BufferedWriter(new FileWriter("asdf.html"));
+		      out.write(str);
+		      out.close();
+		      ////////////////////////////////////////////////////////////////
+		    } catch (IOException e) {
+		        System.err.println(e); // ì—ëŸ¬ê°€ ìˆë‹¤ë©´ ë©”ì‹œì§€ ì¶œë ¥
+		        System.exit(1);
+		    }
+	}
+	*/
+	/*
 	public static void main(String args[])
 	{
 		//testing
 		
 		
 	}
+	*/
 }

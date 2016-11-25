@@ -2,11 +2,13 @@ import java.io.*;
 import java.util.*;
 
 public class CLI  {
+	public String outputFile ="";
+	MDParser p = new MDParser( );
 	public void inputParser(String[] input){
 		Help h = new Help( );
-		MDParser p = new MDParser( );
 		
-		String outputFile ="";
+		
+		
 		//  String style;
 		int styleVariable=1;
 		int inputIndex=-1;
@@ -111,6 +113,7 @@ public class CLI  {
 				System.exit(0);
 			}
 		}
+		
 		if(inputIndex != -1){
 			//order check
 			if (styleIndex == -1){
@@ -145,5 +148,18 @@ public class CLI  {
 		for (i = 0; i < filelist.length; i++) {
 			p.parser(filelist[i]);
 		}
+	}
+	
+	public void fileWrite(String HTMLCode,String fileName){
+		try {
+		      ////////////////////////////////////////////////////////////////
+		      BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
+		      out.write(HTMLCode);
+		      out.close();
+		      ////////////////////////////////////////////////////////////////
+		    } catch (IOException e) {
+		        System.err.println(e); // 에러가 있다면 메시지 출력
+		        System.exit(1);
+		    }
 	}
 }

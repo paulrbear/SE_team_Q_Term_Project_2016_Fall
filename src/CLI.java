@@ -1,14 +1,14 @@
 import java.io.*;
 import java.util.*;
+import org.w3c.tidy.Tidy;
 
 public class CLI  {
 	public String outputFile ="";
 	MDParser p = new MDParser( );
+
 	public void inputParser(String[] input){
 		Help h = new Help( );
-		
-		
-		
+	
 		//  String style;
 		int styleVariable=1;
 		int inputIndex=-1;
@@ -148,6 +148,10 @@ public class CLI  {
 		for (i = 0; i < filelist.length; i++) {
 			p.parser(filelist[i]);
 		}
+		if (isValid(htmlString) )
+			System.out.println("Converted successfully");
+		else
+			System.out.println("There are few errors left");
 	}
 	
 	public void fileWrite(String HTMLCode,String fileName){
@@ -161,5 +165,13 @@ public class CLI  {
 		        System.err.println(e); // 에러가 있다면 메시지 출력
 		        System.exit(1);
 		    }
+	}
+
+	public String htmlcode = "";
+	private boolean isValid(String htmlString){
+		Tidy tidy = new Tidy();
+		InputStream stream = new ByteArrayInputStream(htmlString.getBytes());
+		tidy.parse(stream, System.out);
+		return (tidy.getParseErrors() == 0);
 	}
 }

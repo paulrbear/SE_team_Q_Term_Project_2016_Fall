@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;;
+import java.util.Iterator;
 
 @SuppressWarnings("unused")
 public class MDParser{
@@ -18,7 +18,7 @@ public class MDParser{
 		PLAIN, HEADER, Q_BLOCK, LIST, BLOCK;	
 	}
 
-	public static PlainVisitor v;
+	//public static PlainVisitor v;
 	public static Document doc = new Document();  //Document Object
 	public static boolean startB = false;		 
 	public static boolean endB = false;
@@ -305,7 +305,7 @@ public class MDParser{
 		System.out.println("after comparePN");
 		//callVisitor();
 	}
-	
+	/*
 	public static void callVisitor(){
 		Iterator<Node> it = doc.nodes.iterator();
 		while(it.hasNext()){
@@ -318,6 +318,10 @@ public class MDParser{
 	}
 	public String getHTML(){
 		return v.getDocument();
+	}
+	*/
+	public Document getDoc(){
+		return doc;
 	}
 	/*
 	public void fileWrite(String str){

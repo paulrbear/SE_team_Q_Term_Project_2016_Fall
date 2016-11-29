@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 class HeaderNode extends Node{
 	public enum NodeStyle{
@@ -7,8 +8,9 @@ class HeaderNode extends Node{
 	
 	public HeaderNode(String str,NodeStyle style){
 		nodeString = str;
+		tokens=new ArrayList<Node>();
 		setStyle(style);
-		//nodeParse();
+		nodeParse();
 	}
 	public void setStyle(NodeStyle style){
 		nodeStyle= style;

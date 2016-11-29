@@ -1,47 +1,60 @@
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.w3c.tidy.Tidy;
+
 public class MDConverter{
 	public static void main(String[] args) {
-		Help h = new Help( );
-		CLI cli = new CLI( );
-
-		if (args.length == 0) {
-			System.out.println("No input");
-			h.help();
-			System.exit(0);
+		
+		CLI cli = new CLI(args);
+		MDParser p = new MDParser(cli.filelist.get(0)); //TODO : multiple input
+		Document doc = p.getDoc();
+		Visitor v = null;
+		
+		switch(cli.styleVariable){
+		case 1:
+			v = new PlainVisitor();
+			doc.accept(v);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		default:
+			break;
 		}
-		if(args.length == 1){
-			if(args[0] .equals("help") || args[0] == "-h") {
-				h.help();
-				System.exit(0);public class MDConverter{
-					public static void main(String[] args) {
-						Help h = new Help( );
-						CLI cli = new CLI( );
-
-						if (args.length == 0) {
-							System.out.println("No input");
-							h.help();
-							System.exit(0);
-						}
-						if(args.length == 1){
-							if(args[0] .equals("help") || args[0] == "-h") {
-								h.help();
-								System.exit(0);
-							}
-						}
-						
-				//test	System.out.println("before input Parser");
-						cli.inputParser(args); 
-						//TODO: CLI cli = new CLI(args);
-						//TODO: CLI:MDParser p = new MDParser(cli.transferData());
-						//TODO: PlainVisitor v = new Plainvistor(Document doc);
-						//TODO: Jtidy.check(v.HTMLCode);
-						//TODO: filewrite(v.HTMLCode);
-						//cli.fileWrite(cli.p.getHTML(),cli.outputFile);
-					}
-				}
-			}
+		System.out.println(v.getDocument());
+		jtidy(v.getDocument(),cli.outputFile);
+	}
+	
+	private static void jtidy(String HTMLCode,String fileName){
+		Tidy tidy = new Tidy();
+		InputStream is = null; 
+		try{		
+			is = new ByteArrayInputStream(HTMLCode.getBytes("UTF-8"));
+			tidy.setXHTML(true); 
+	        tidy.setDocType("\"-//W3C//DTD XHTML 1.0 Transitional//EN\""); 
+	        tidy.setInputEncoding("UTF-8");
+/*	        tidy.setQuiet(true); 
+	        tidy.setShowWarnings(false); 
+	        tidy.setIndentContent(true); 
+	        tidy.setSmartIndent(true); 
+	        tidy.setIndentAttributes(true); 
+	        tidy.setWraplen(0);
+*/	        ByteArrayOutputStream out = new ByteArrayOutputStream(1024); 
+	        tidy.parse(is, out); 
+	        FileOutputStream fos = new FileOutputStream(new File(fileName));
+	        out.writeTo(fos);
+			
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (IOException e) {
+		   e.printStackTrace();
 		}
-		System.out.println("before input Parser");
-		cli.inputParser(args);
-		//cli.fileWrite(cli.p.getHTML(),cli.outputFile);
 	}
 }

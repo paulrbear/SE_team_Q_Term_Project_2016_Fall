@@ -1,7 +1,7 @@
 import java.io.*;
 
 class Help {
-	public void help(){
+	public static void help(){
 		System.out.println("Help messages");
 		File file = new File("README.md");
 		if (!file.exists()) {
@@ -21,5 +21,6 @@ class Help {
 				System.out.println("Error reading file '" + file ); 
 			}
 		}
+		System.exit(0);
 	}
 }

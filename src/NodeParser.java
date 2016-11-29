@@ -1,22 +1,21 @@
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-@SuppressWarnings("unused")
+
+
 public class NodeParser{
 
 	public enum TokenType{
 		PLAIN, EM, STRONG, HTML, LINK, IMAGE, ITEM_LIST, HEADER, Q_BLOCK;	
 	}
 	
-	private static String buffer;
-	private static String current;
-	private static String leftover;
+//	private static String buffer;
+//	private static String current;
+//	private static String leftover;
 	private static String[] spl;
 	public static ArrayList<String> parseString = new ArrayList<>();
 	
-	private static boolean bold;
-	private static boolean italic;
+//	private static boolean bold;
+//	private static boolean italic;
 	
 	
 	////////////////////////Constructor//////////////////////
@@ -29,19 +28,22 @@ public class NodeParser{
 	}
 	
 	/////////////////////////Parser///////////////////////////
-	public void nodeStringParser(Node np){
+	public static void nodeStringParser(Node np){
 		String ns = np.nodeString;
-		
-		while(ns!=null){
-			if(ns.matches("^/*/*.*/*/*")){
+		System.out.println("asdf");
+		while(!ns.isEmpty()){
+/*			if(ns.matches("")){
 				isBoldItalic(ns);
 				buffer = spl[0];
-				createToken(buffer, TokenType.PLAIN);
+				createToken(np, buffer, TokenType.PLAIN);
 				current = spl[1];
-				createToken(current, TokenType.STRONG);
+				createToken(np, current, TokenType.STRONG);
 				leftover = spl[2];
 				ns = leftover;
-			}
+			}else{
+*/				createToken(np, ns, TokenType.PLAIN);
+				ns="";
+//			}
 		
 		}//end of while
 	}//end of nSP
@@ -141,23 +143,24 @@ public class NodeParser{
 		}
 
 	//Create new Token and add to Node Array
-	public static void createToken(String ts, TokenType type)
+	public static void createToken(Node np, String ts, TokenType type)
 	{
-		Node node;
+		Token token;
 		if(type.ordinal()==0){
-			node = new Token();
-			node.tokens.add(node);
+			token = new PlainToken();
+			token.setString(ts);
+			np.tokens.add(token);
 		}else if(type.ordinal()==1){
-			node = new ItalicToken();
-			node.tokens.add(node);
+			token = new ItalicToken();
+			np.tokens.add(token);
 		}else if(type.ordinal()==1){
-			node = new BoldToken();
-			node.tokens.add(node);
+			token = new BoldToken();
+			np.tokens.add(token);
 		}else{
 			System.out.printf("error in createToken");
 		}
 		
-		initializeAll();
+		//initializeAll();
 	}
 	
 	

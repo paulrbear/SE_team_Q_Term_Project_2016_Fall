@@ -3,16 +3,12 @@ import java.util.Iterator;
 
 public class PlainVisitor implements Visitor{
 	
-	static String htmlCode = "<html><head><title></title></head>\n<body>";
-	
-
-	public PlainVisitor(){
-		
-	}
-	@Override
+	static String htmlCode = "<html>\n<body>";
 	public String getDocument(){
 		return htmlCode + "</body>\n</html>";
 	}
+
+	@Override
 	public void visitHeaderNode(HeaderNode node) {
 		Iterator<Node> it = node.tokens.iterator();
 		switch(node.nodeStyle){
@@ -54,12 +50,17 @@ public class PlainVisitor implements Visitor{
 
 	public void visitBoldToken(BoldToken bt) {
 		// TODO Auto-generated method stub
-		
 	}
-	@Override
 	public void visitPlainToken(PlainToken pt) {
-		htmlCode = htmlCode + pt.getString();
-		
+		// TODO Auto-generated method stub	
 	}
-	
+	public void visitItemListNode(ItemListNode in) {
+		// TODO Auto-generated method stub
+	}
+	public void visitBlockNode(BlockNode bn) {
+		//
+	}
+	public void visitQBlockNode(QuotedBlockNode qbn) {
+		//
+	}
 }

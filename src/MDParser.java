@@ -91,9 +91,10 @@ public class MDParser{
 	
 	public static boolean isStart(String line)
 	{		
-		
+		if(line.trim().isEmpty())
+			return false;
    	    // HEADERS
-		if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
+		else if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
 					||line.startsWith("#### ")||line.startsWith("##### ")||line.startsWith("###### "))
 		{
 			// create a node with buffered string previous to this line.
@@ -113,9 +114,10 @@ public class MDParser{
 		// UNORDERED LIST - START
 		else if(line.startsWith("* ")&& ntype != NodeType.UL_ITEM)
 		{			
+			System.out.println("999999");
 			// create a node with prev lines (stored @nodeString)
 			//System.out.println("ns: " + nodeString + ", prev: " + prevLine);
-			if(!(prevLine.trim().isEmpty()))
+			if(!(prevLine.trim().isEmpty())&&ntype != NodeType.HEADER)
 			{
 				nodeString = prevLine + "\n";
 				createNode(nodeString);
@@ -125,21 +127,22 @@ public class MDParser{
 			ntype = NodeType.UL_ITEM;
 			return true;
 		}
-		
-		
 		// ORDERED LIST - START
 		else if(Character.isDigit(line.charAt(0))&&ntype != NodeType.OL_ITEM)
 		{
+			System.out.println("12345676");
 			if((line.substring(1,line.length())).startsWith(". ")) // ordered list
 			{
-				if(!(prevLine.trim().isEmpty()))
+				System.out.println("666666");
+				if(!(prevLine.trim().isEmpty())&&ntype != NodeType.HEADER)
 				{
-					nodeString = prevLine + "\n";
+					System.out.println("877777");		
+					nodeString = nodeString + prevLine + "\n";
 					createNode(nodeString);
 					nodeString = "";
 					prevLine = "";
 				}
-				ntype = NodeType.UL_ITEM;
+				ntype = NodeType.OL_ITEM;
 				return true;
 			}
 			else
@@ -263,20 +266,18 @@ public class MDParser{
 			initializeAll();
 			return true;
 		}
-		else if(ntype==NodeType.UL_ITEM)
+		else if(ntype==NodeType.UL_ITEM || ntype == NodeType.OL_ITEM)
 		{
 			System.out.println("3");
 			if(line.trim().isEmpty())//blank line
 			{
 				if(!nl_flag)
 				{
-					System.out.println("4");
 					nl_flag = true;	
 					return false;
 				}
 				else
 				{
-					System.out.println("5");
 					// two or blank lines! 
 					// Create unordered item_list Node.
 					nodeString = nodeString + line;

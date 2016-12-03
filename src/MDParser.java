@@ -96,9 +96,17 @@ public class MDParser{
 		if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
 					||line.startsWith("#### ")||line.startsWith("##### ")||line.startsWith("###### "))
 		{
+			// create a node with buffered string previous to this line.
+			if(!(nodeString.trim().isEmpty()))
+			{
+				if(!(prevLine.trim().isEmpty()))
+					nodeString = nodeString + prevLine + "\n";
+				createNode(nodeString);
+				nodeString = "";
+				prevLine = "";
+			}		
 			// Setting
 			ntype = NodeType.HEADER;
-			
 			return true;
 		}
 		
@@ -218,12 +226,7 @@ public class MDParser{
 
 		if(ntype == NodeType.HEADER && line.startsWith("#"))
 		{
-			// create a node with buffered string previous to this line.
-			if(!(nodeString.trim().isEmpty()))
-			{
-				createNode(nodeString);
-				initializeAll();
-			}			
+		
 
 		// string processing
 			// eliminate '#' in the front

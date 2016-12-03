@@ -127,6 +127,25 @@ public class MDParser{
 		}
 		
 		
+		// ORDERED LIST - START
+		else if(Character.isDigit(line.charAt(0))&&ntype != NodeType.OL_ITEM)
+		{
+			if((line.substring(1,line.length())).startsWith(". ")) // ordered list
+			{
+				if(!(prevLine.trim().isEmpty()))
+				{
+					nodeString = prevLine + "\n";
+					createNode(nodeString);
+					nodeString = "";
+					prevLine = "";
+				}
+				ntype = NodeType.UL_ITEM;
+				return true;
+			}
+			else
+				return false;
+		}
+		
 		// BLOCK(PLAIN TEXT)
 		else if(prevLine=="" && ntype == NodeType.BLOCK)
 		{

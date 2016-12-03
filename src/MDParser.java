@@ -15,15 +15,17 @@ public class MDParser{
 
 	public static enum NodeType
 	{
-		PLAIN, HEADER, Q_BLOCK, LIST, BLOCK;	
+		PLAIN, HEADER, UL_ITEM, OL_ITEM, Q_BLOCK, BLOCK;	
 	}
 
 	//public static PlainVisitor v;
 	public static Document doc = new Document();  //Document Object
 	public static boolean startB = false;		 
 	public static boolean endB = false;
-	
 	public static ArrayList<String> stringList = new ArrayList<>();
+	public static boolean nl_flag = false; // new line count 
+	
+	
 	
 	// temporary variables
 	public static String nodeString = "";
@@ -39,9 +41,11 @@ public class MDParser{
 	public static HeaderNode.NodeStyle nstyle;
 */
 	
+	
 	// testing
-//	static String path;
-//	static File f = new File(path);
+	static String path = "C:" + File.separator + "Users" + File.separator + "Eunbee" + File.separator + "workspace" + File.separator + "file.txt";
+	static File f = new File(path);
+	
 	
 	
 // CONSTRUCTOR
@@ -64,29 +68,23 @@ public class MDParser{
 		if(isStart(nextLine))
 		{
 			startB = true;
-				
-			// action: ���� nodeString���� new node �����ϰ�  NodeArr�� ����, nextLine�� ����� nodeString�� ����
 		}
-		System.out.println("1");
 		// check if nextLine ends the node.	
 		if(isEnd(nextLine))
 		{
 			endB = true;
-			return;		// action: ���� nodeString�� �ڽ��� ���ϰ�  �� nodeString���� new node ����, NodeArr�� �߰�.
+			return;		
 		}
 		else
 		{
-			prevLine = nextLine;
+			
 		}
-			// RULES 	
-		// blank line
-	//	if(line.trim().isEmpty())
-		//{
-	//		nodeString
-	//	}
-		
-		// update temps.
-		nodeString = nodeString + prevLine + "\n";
+
+		// update variables.
+		if(!(prevLine.trim().isEmpty()))
+			nodeString = nodeString + prevLine + "\n";
+		prevLine = nextLine;
+
 		
 	}
 
@@ -94,24 +92,34 @@ public class MDParser{
 	public static boolean isStart(String line)
 	{		
 		
-   	    // HEADERS : #���� �����ϴ� header��
+   	    // HEADERS
 		if(line.startsWith("# ")||line.startsWith("## ")||line.startsWith("### ")
 					||line.startsWith("#### ")||line.startsWith("##### ")||line.startsWith("###### "))
 		{
-			// create a node with buffered string previous to this line.
-	
-			
-			if(!(nodeString.trim().isEmpty()))
-			{
-				createNode(nodeString);
-			}			
-
 			// Setting
 			ntype = NodeType.HEADER;
 			
 			return true;
 		}
-		// Plain text
+		
+		// UNORDERED LIST - START
+		else if(line.startsWith("* ")&& ntype != NodeType.UL_ITEM)
+		{			
+			// create a node with prev lines (stored @nodeString)
+			//System.out.println("ns: " + nodeString + ", prev: " + prevLine);
+			if(!(prevLine.trim().isEmpty()))
+			{
+				nodeString = prevLine + "\n";
+				createNode(nodeString);
+				nodeString = "";
+				prevLine = "";
+			}
+			ntype = NodeType.UL_ITEM;
+			return true;
+		}
+		
+		
+		// BLOCK(PLAIN TEXT)
 		else if(prevLine=="" && ntype == NodeType.BLOCK)
 		{
 			return true;
@@ -167,11 +175,15 @@ public class MDParser{
 			}			
 			if(h1 == line.length())
 			{
+				if(!(nodeString.trim().isEmpty()))
+				{
+					createNode(nodeString);
+				}
+				// create (new) node.
+				ntype = NodeType.HEADER;
 				hStyle = HeaderNode.NodeStyle.values()[0];
-
-				// Node ����		
-				nodeString = prevLine +"\n"; 	// nodeString update	
-				createNode(nodeString, HeaderNode.NodeStyle.H1);
+				createNode(prevLine, HeaderNode.NodeStyle.H1);
+				initializeAll();
 			}
 			
 			return true;
@@ -188,29 +200,75 @@ public class MDParser{
 			
 			if(h2 == line.length())
 			{
+				// create (prev) node.
+				if(!(nodeString.trim().isEmpty()))
+				{
+					createNode(nodeString);
+				}
+				// create (new) node.
+				ntype = NodeType.HEADER;
 				hStyle = HeaderNode.NodeStyle.values()[1];
-				
-				// Node ����		
-				nodeString = prevLine +"\n"; 	// nodeString update	
-				createNode(nodeString, HeaderNode.NodeStyle.H2);
+				createNode(prevLine, HeaderNode.NodeStyle.H2);
+				initializeAll();
 			}
 			
 			return true;
 		}
-		else if(ntype == NodeType.HEADER && line.startsWith("#"))
+		
+
+		if(ntype == NodeType.HEADER && line.startsWith("#"))
 		{
-			// string ����
+			// create a node with buffered string previous to this line.
+			if(!(nodeString.trim().isEmpty()))
+			{
+				createNode(nodeString);
+				initializeAll();
+			}			
+
+		// string processing
+			// eliminate '#' in the front
 			int hnum = HeaderNum(line, '#');
 			hStyle = HeaderNode.NodeStyle.values()[hnum - 1];
-		
 			line = line.substring(hnum + 1);
-		
+			// eliminate '#' at the end
+			while(line.endsWith("#"))		
+			{
+				line = line.substring(0, line.length()-1);
+			}
+			
 			// node ����
 			createNode(line, hStyle);
-			
+			initializeAll();
 			return true;
 		}
-		else		
+		else if(ntype==NodeType.UL_ITEM)
+		{
+			System.out.println("3");
+			if(line.trim().isEmpty())//blank line
+			{
+				if(!nl_flag)
+				{
+					System.out.println("4");
+					nl_flag = true;	
+					return false;
+				}
+				else
+				{
+					System.out.println("5");
+					// two or blank lines! 
+					// Create unordered item_list Node.
+					nodeString = nodeString + line;
+					createNode(nodeString);
+					initializeAll();
+					return true;
+				}
+			}
+			else
+			{
+				nl_flag = false;
+			}
+			return false;
+		}
 			return false;
 	}
 	
@@ -240,13 +298,19 @@ public class MDParser{
 	{
 		//create Node and set its type.
 	/*	Node node;
-		node = new PlainNode(ns);
+		if(ntype == NodeType.BLOCK)
+		{
+			node = new BlockNode(ns);
 			doc.nodes.add(node);
-	*/
-			//initialize all temp variables.
+		}
+		else if(ntype == NodeType.UL_ITEM)
+		{
+			node = new ULItemNode(ns);
+			doc.nodes.add(node);
+		}
+	*/	
+		System.out.println("\nnode 생성:" + s + "type: " + ntype);
 		
-		System.out.println("��� ����:\n" + s);
-	//	initializeAll();
 	}
 	
 	// header node
@@ -256,11 +320,10 @@ public class MDParser{
 		HeaderNode node;
 		node = new HeaderNode(s, hs);
 		doc.nodes.add(node);
-		System.out.println("��� ����:\n" + s);
+		System.out.println("node 생성:" + s + "\ntype " + ntype);
 		
-		//initialize all temp variables.
-		initializeAll();
 	}
+
 	
 	
 	// Flush method. Empty all temps.
@@ -288,7 +351,6 @@ public class MDParser{
 			while((bufferLine = bufferedReader.readLine()) != null) 
 			{
 				stringList.add(bufferLine);
-				System.out.println(bufferLine);
 				count++;
 			}
 			bufferedReader.close();
@@ -296,13 +358,11 @@ public class MDParser{
 			System.out.println("Error reading file '" + Inputfile ); 
 		}
 		
-		System.out.println("before comparePN");
 		// String array �� string ����  parse ����
 		for(int i = 0; i <stringList.size();i++)
 		{
 			comparePN(stringList.get(i));
 		}
-		System.out.println("after comparePN");
 		//callVisitor();
 	}
 	/*
@@ -337,12 +397,12 @@ public class MDParser{
 		    }
 	}
 	*/
-	/*
 	public static void main(String args[])
 	{
 		//testing
+		MDParser mdp = new MDParser(f);
 		
+			
 		
 	}
-	*/
 }

@@ -2,7 +2,14 @@ import java.util.Iterator;
 
 public class PlainVisitor implements Visitor{
 	
-	static String htmlCode = "<html>\n<body>";
+
+	static String htmlCode = "<html><head><title></title></head>\n<body>";
+	
+
+	public PlainVisitor(){
+		
+	}
+
 	public String getDocument(){
 		return htmlCode + "</body>\n</html>";
 	}
@@ -107,5 +114,6 @@ public class PlainVisitor implements Visitor{
 	public void visitBoldToken(BoldToken bt) {
 	}
 	public void visitPlainToken(PlainToken pt) {
+		htmlCode = htmlCode + pt.getString();
 	}
 }

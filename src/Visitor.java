@@ -6,4 +6,5 @@ public interface Visitor {
 	public void visitHRNode(HorizonRuleNode hrn);
 	public void visitBoldToken(BoldToken bt);
 	public void visitPlainToken(PlainToken pt);
+	public String getDocument();
 }

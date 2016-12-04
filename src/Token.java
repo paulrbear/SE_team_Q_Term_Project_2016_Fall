@@ -1,17 +1,14 @@
 public class Token extends Node{
+	
 	String tokenString;
+	String tokenDir;
+	
 	public Token(){
-		
-	}
-	public Token(String str){
-		setString(str);
 	}
 	
-	public void setString(String str){
-		tokenString = str;
+	@Override
+	public void accept(Visitor v) {
+		// TODO Auto-generated method stub
+		
 	}
-	public String getString(){
-		return tokenString;
-	}
-
 }

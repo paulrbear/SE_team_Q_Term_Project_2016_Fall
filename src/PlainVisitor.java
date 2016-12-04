@@ -1,4 +1,3 @@
-
 import java.util.Iterator;
 
 public class PlainVisitor implements Visitor{
@@ -9,9 +8,9 @@ public class PlainVisitor implements Visitor{
 	}
 
 	@Override
-	public void visitHeaderNode(HeaderNode node) {
-		Iterator<Node> it = node.tokens.iterator();
-		switch(node.nodeStyle){
+	public void visitHeaderNode(HeaderNode hn) {
+		Iterator<Node> it = hn.tokens.iterator();
+		switch(hn.nodeStyle){
 		case H1:
 			htmlCode = htmlCode + "<h1>";
 			while(it.hasNext())	it.next().accept(this);
@@ -47,20 +46,66 @@ public class PlainVisitor implements Visitor{
 			break;
 		}
 	}
-
-	public void visitBoldToken(BoldToken bt) {
-		// TODO Auto-generated method stub
-	}
-	public void visitPlainToken(PlainToken pt) {
-		// TODO Auto-generated method stub	
-	}
 	public void visitItemListNode(ItemListNode in) {
-		// TODO Auto-generated method stub
+		Iterator<Node> it = in.tokens.iterator();
+		switch(in.nodeStyle) {
+		case Ordered:
+			htmlCode = htmlCode + "<ol>";
+			// need to handle sub item list
+			while (it.hasNext()) it.next().accept(this);
+			htmlCode = htmlCode + "</ol>";
+		case Unordered:
+			htmlCode = htmlCode + "<ul>";
+			while (it.hasNext()) it.next().accept(this);
+			htmlCode = htmlCode + "</ul>";			
+		default:
+			System.out.println("error!!");
+			break;
+		}
 	}
 	public void visitBlockNode(BlockNode bn) {
-		//
+		Iterator<Node> it = bn.tokens.iterator();
+		switch(bn.nodeStyle) {
+		case Plain:
+			htmlCode = htmlCode + "<p>";
+			// handle details in visitPlainToken
+			while (it.hasNext()) it.next().accept(this);
+			htmlCode = htmlCode + "</p>";
+		case Image:
+			htmlCode = htmlCode + "<p>";
+			// handle details in visitImageToken
+			while (it.hasNext()) it.next().accept(this);
+			htmlCode = htmlCode + "</p>";
+		case Link:
+			htmlCode = htmlCode + "<p>";
+			// handle details in visitLinkToken
+			while (it.hasNext()) it.next().accept(this);
+			htmlCode = htmlCode + "</p>";
+		case Html:
+			// handle details in visitHtmlToken
+		case Code:
+			htmlCode = htmlCode + "<p>";
+			// handle details in visitCodeToken
+			while (it.hasNext()) it.next().accept(this);
+			htmlCode = htmlCode + "</p>";
+		default:
+			System.out.println("error!!");
+			break;
+		}
 	}
 	public void visitQBlockNode(QuotedBlockNode qbn) {
-		//
+		Iterator<Node> it = qbn.tokens.iterator();
+		htmlCode = htmlCode + "<q>";
+		while (it.hasNext()) it.next().accept(this);
+		htmlCode = htmlCode + "</q>";
+	}
+	public void visitHRNode(HorizonRuleNode hrn) {
+		Iterator<Node> it = hrn.tokens.iterator();
+		htmlCode = htmlCode + "<hr>";
+		while (it.hasNext()) it.next().accept(this);
+	}
+	public void visitBoldToken(BoldToken bt) {
+	}
+	public void visitPlainToken(PlainToken pt) {
 	}
 }

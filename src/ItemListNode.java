@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 class ItemListNode extends Node{
 	public enum NodeStyle{
@@ -7,6 +8,7 @@ class ItemListNode extends Node{
 	
 	public ItemListNode(String str,NodeStyle style){
 		nodeString = str;
+		tokens=new ArrayList<Node>();
 		setStyle(style);
 		//nodeParse();
 	}
@@ -19,5 +21,4 @@ class ItemListNode extends Node{
 	public void accept(Visitor v){
 		v.visitItemListNode(this);
 	}
-
 }

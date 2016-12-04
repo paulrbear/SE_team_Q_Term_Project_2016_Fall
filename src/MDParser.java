@@ -149,6 +149,21 @@ public class MDParser{
 				return false;
 		}
 		
+		// QUOTED_BLOCK - START
+		else if(line.startsWith(">")&& ntype != NodeType.Q_BLOCK)
+		{
+		// create (prev) node.
+			if(!(prevLine.trim().isEmpty())&&ntype != NodeType.HEADER)
+			{
+				nodeString = prevLine + "\n";
+				createNode(nodeString);
+				nodeString = "";
+				prevLine = "";
+			}
+			ntype = NodeType.Q_BLOCK;
+			return true;
+		}
+		
 		// BLOCK(PLAIN TEXT)
 		else if(prevLine=="" && ntype == NodeType.BLOCK)
 		{
@@ -246,7 +261,7 @@ public class MDParser{
 		}
 		
 
-		if(ntype == NodeType.HEADER && line.startsWith("#"))
+		else if(ntype == NodeType.HEADER && line.startsWith("#"))
 		{
 		
 
@@ -266,7 +281,7 @@ public class MDParser{
 			initializeAll();
 			return true;
 		}
-		else if(ntype==NodeType.UL_ITEM || ntype == NodeType.OL_ITEM)
+		else if(ntype==NodeType.UL_ITEM || ntype == NodeType.OL_ITEM || ntype==NodeType.Q_BLOCK)
 		{
 			System.out.println("3");
 			if(line.trim().isEmpty())//blank line
@@ -292,7 +307,11 @@ public class MDParser{
 			}
 			return false;
 		}
+		
+		else
+		{
 			return false;
+		}
 	}
 	
 	

@@ -5,7 +5,7 @@ public class ImageToken extends Token {
 		tokenDir = dir;
 	}
 	public void accept(Visitor v){
-		v.visitImageToken(this, this);
+		v.visitImageToken(this);
 	}
 	
 }

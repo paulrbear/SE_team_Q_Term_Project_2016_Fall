@@ -9,8 +9,8 @@ public interface Visitor {
 	
 	//Token
 	public void visitCodeToken(CodeToken ct);
-	public void visitImageToken(ImageToken it, ImageToken dir);
-	public void visitHTMLToken(HTMLToken ht, HTMLToken dir);
+	public void visitImageToken(ImageToken it);
+	public void visitHTMLToken(HTMLToken ht);
 		//Block -> multiple
 		public void visitPlainToken(PlainToken pt);
 		public void visitBoldToken(BoldToken bt);

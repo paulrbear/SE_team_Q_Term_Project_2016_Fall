@@ -11,4 +11,7 @@ public class Token extends Node{
 		// TODO Auto-generated method stub
 		
 	}
+	public String getString(){
+		return tokenString;
+	}
 }

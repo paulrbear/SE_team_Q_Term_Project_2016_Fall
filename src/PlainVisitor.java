@@ -1,7 +1,9 @@
 import java.util.Iterator;
 
+
 public class PlainVisitor implements Visitor{
 	
+
 
 	static String htmlCode = "<html><head><title></title></head>\n<body>";
 	
@@ -115,5 +117,29 @@ public class PlainVisitor implements Visitor{
 	}
 	public void visitPlainToken(PlainToken pt) {
 		htmlCode = htmlCode + pt.getString();
+	}
+
+	@Override
+	public void visitCodeToken(CodeToken ct) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitImageToken(ImageToken it, ImageToken dir) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitHTMLToken(HTMLToken ht, HTMLToken dir) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visitItalicToken(ItalicToken it) {
+		// TODO Auto-generated method stub
+		
 	}
 }

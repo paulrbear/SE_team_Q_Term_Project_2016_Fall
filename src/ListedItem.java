@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 
-public class BoldToken extends Token {
-	
-	public BoldToken(String str){
+public class ListedItem extends Node {
+	public ListedItem(String str){
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		nodeParse();
 	}
 	public void accept(Visitor v){
-		v.visitBoldToken(this);
+		v.visitListedItem(this);
 	}
-
 }

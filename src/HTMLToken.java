@@ -5,7 +5,7 @@ public class HTMLToken extends Token {
 		tokenDir = dir;
 	}
 	public void accept(Visitor v){
-		v.visitHTMLToken(this);
+		v.visitHTMLToken(this, this);
 	}
 	
 }

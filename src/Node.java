@@ -13,7 +13,6 @@ public class Node implements nodeInterface{
 	}
 	// send node string to node parser for parsing into tokens.
 	public void nodeParse() {
-		
 		NodeParser.nodeStringParser(this);
 	}
 	public void addToken(Token token){

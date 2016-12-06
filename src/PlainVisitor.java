@@ -74,33 +74,10 @@ public class PlainVisitor implements Visitor{
 	}
 	public void visitBlockNode(BlockNode bn) {
 		Iterator<Node> it = bn.tokens.iterator();
-		switch(bn.nodeStyle) {
-		case Plain:
-			htmlCode = htmlCode + "<p>";
-			// handle details in visitPlainToken
-			while (it.hasNext()) it.next().accept(this);
-			htmlCode = htmlCode + "</p>";
-		case Image:
-			htmlCode = htmlCode + "<p>";
-			// handle details in visitImageToken
-			while (it.hasNext()) it.next().accept(this);
-			htmlCode = htmlCode + "</p>";
-		case Link:
-			htmlCode = htmlCode + "<p>";
-			// handle details in visitLinkToken
-			while (it.hasNext()) it.next().accept(this);
-			htmlCode = htmlCode + "</p>";
-		case Html:
-			// handle details in visitHtmlToken
-		case Code:
-			htmlCode = htmlCode + "<p>";
-			// handle details in visitCodeToken
-			while (it.hasNext()) it.next().accept(this);
-			htmlCode = htmlCode + "</p>";
-		default:
-			System.out.println("error!!");
-			break;
-		}
+		htmlCode = htmlCode + "<p>";
+		while (it.hasNext()) it.next().accept(this);
+		htmlCode = htmlCode + "</p>";
+	
 	}
 	public void visitQBlockNode(QuotedBlockNode qbn) {
 		Iterator<Node> it = qbn.tokens.iterator();
@@ -114,6 +91,10 @@ public class PlainVisitor implements Visitor{
 		while (it.hasNext()) it.next().accept(this);
 	}
 	public void visitBoldToken(BoldToken bt) {
+		Iterator<Node> it = bt.tokens.iterator();
+		htmlCode = htmlCode + "<strong>";
+		while (it.hasNext()) it.next().accept(this);
+		htmlCode = htmlCode + "</strong>";
 	}
 	public void visitPlainToken(PlainToken pt) {
 		htmlCode = htmlCode + pt.getString();
@@ -139,7 +120,19 @@ public class PlainVisitor implements Visitor{
 
 	@Override
 	public void visitItalicToken(ItalicToken it) {
-		// TODO Auto-generated method stub
+		Iterator<Node> iter = it.tokens.iterator();
+		htmlCode = htmlCode + "<em>";
+		while (iter.hasNext()) iter.next().accept(this);
+		htmlCode = htmlCode + "</em>";
+		
+	}
+
+	@Override
+	public void visitListedItem(ListedItem li) {
+		Iterator<Node> it = li.tokens.iterator();
+		htmlCode = htmlCode + "<li>";
+		while (it.hasNext()) it.next().accept(this);
+		htmlCode = htmlCode + "</li>";
 		
 	}
 }

@@ -10,12 +10,9 @@ class ItemListNode extends Node{
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		setStyle(style);
-		//nodeParse();
+		nodeParse();
 	}
-	public ItemListNode(String ns) {
-		// TODO Auto-generated constructor stub
-	}
-	public void setStyle(NodeStyle style){
+	private void setStyle(NodeStyle style){
 		nodeStyle= style;
 	}
 	public NodeStyle getStyle(){

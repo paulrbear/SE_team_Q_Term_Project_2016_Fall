@@ -12,6 +12,9 @@ class ItemListNode extends Node{
 		setStyle(style);
 		//nodeParse();
 	}
+	public ItemListNode(String ns) {
+		// TODO Auto-generated constructor stub
+	}
 	public void setStyle(NodeStyle style){
 		nodeStyle= style;
 	}

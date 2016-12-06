@@ -6,7 +6,7 @@ class BlockNode extends Node{
 	}
 	public NodeStyle nodeStyle;
 	
-	public BlockNode(String str, NodeStyle style){
+	public BlockNode(String str){
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		setStyle(style);

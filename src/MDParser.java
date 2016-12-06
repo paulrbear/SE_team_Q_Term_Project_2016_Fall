@@ -336,22 +336,28 @@ public class MDParser{
 	
 
 // CREATE NODE methods :
-	public static void createNode(String s)
+	public static void createNode(String ns)
 	{
 		//create Node and set its type.
-	/*	Node node;
+		Node node;
 		if(ntype == NodeType.BLOCK)
 		{
 			node = new BlockNode(ns);
 			doc.nodes.add(node);
 		}
-		else if(ntype == NodeType.UL_ITEM)
+		else if(ntype == NodeType.UL_ITEM || ntype == NodeType.OL_ITEM)  
 		{
-			node = new ULItemNode(ns);
+			node = new ItemListNode(ns);
 			doc.nodes.add(node);
 		}
-	*/	
-		System.out.println("\nnode 생성:" + s + "type: " + ntype);
+		else if(ntype == NodeType.Q_BLOCK)  
+		{
+			node = new QuotedBlockNode(ns);
+			doc.nodes.add(node);
+		}
+		
+		
+		System.out.println("\nnode 생성:" + ns + "type: " + ntype);
 		
 	}
 	

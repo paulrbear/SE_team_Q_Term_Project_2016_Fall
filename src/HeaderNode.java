@@ -10,7 +10,7 @@ class HeaderNode extends Node{
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		setStyle(style);
-		//nodeParse();
+		nodeParse();
 	}
 	public void setStyle(NodeStyle style){
 		nodeStyle= style;

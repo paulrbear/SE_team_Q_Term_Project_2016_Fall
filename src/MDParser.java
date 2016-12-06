@@ -347,7 +347,12 @@ public class MDParser{
 		}
 		else if(ntype == NodeType.UL_ITEM || ntype == NodeType.OL_ITEM)  
 		{
-			node = new ItemListNode(ns);
+			if(ntype==NodeType.UL_ITEM){
+				node = new ItemListNode(ns,ItemListNode.NodeStyle.Unordered);
+			}else{
+				node = new ItemListNode(ns,ItemListNode.NodeStyle.Ordered);
+			}
+				
 			doc.nodes.add(node);
 		}
 		else if(ntype == NodeType.Q_BLOCK)  

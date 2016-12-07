@@ -1,4 +1,4 @@
-package main;
+package org.mdconverter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

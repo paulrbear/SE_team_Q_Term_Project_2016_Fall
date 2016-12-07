@@ -1,4 +1,4 @@
-package main;
+package org.mdconverter;
 import java.util.ArrayList;
 
 public class BoldToken extends Token {

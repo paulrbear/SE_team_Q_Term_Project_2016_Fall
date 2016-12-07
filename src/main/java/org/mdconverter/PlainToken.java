@@ -1,4 +1,5 @@
-package main;
+package org.mdconverter;
+
 public class PlainToken extends Token {
 	
 	public PlainToken(String str){

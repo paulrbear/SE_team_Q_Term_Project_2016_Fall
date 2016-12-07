@@ -1,4 +1,4 @@
-package main;
+package org.mdconverter;
 public class BackslashEscape {
 
 	public String BackslashEscape(String checkString){

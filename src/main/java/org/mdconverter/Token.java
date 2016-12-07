@@ -1,4 +1,5 @@
-package main;
+package org.mdconverter;
+
 public class Token extends Node{
 	
 	String tokenString;

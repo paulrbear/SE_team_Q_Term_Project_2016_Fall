@@ -1,4 +1,5 @@
-package main;
+package org.mdconverter;
+
 public interface Visitor {
 	//Node
 	public void visitHeaderNode(HeaderNode hn);

@@ -1,13 +1,15 @@
-package main;
+package org.mdconverter;
 import java.util.ArrayList;
 
-class QuotedBlockNode extends Node{	
-	public QuotedBlockNode(String str){
+class BlockNode extends Node{
+	
+	public BlockNode(String str){
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		nodeParse();
 	}
+
 	public void accept(Visitor v){
-		v.visitQBlockNode(this);
+		v.visitBlockNode(this);
 	}
 }

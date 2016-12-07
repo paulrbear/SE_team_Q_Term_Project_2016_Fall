@@ -1,4 +1,4 @@
-package main;
+package org.mdconverter;
 public class CodeToken extends Token {
 
 	public CodeToken(String str){

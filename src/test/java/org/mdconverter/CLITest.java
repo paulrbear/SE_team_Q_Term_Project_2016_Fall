@@ -1,8 +1,9 @@
-package test;
+package org.mdconverter;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import main.CLI;
+import org.mdconverter.CLI;
 
 public class CLITest {
 

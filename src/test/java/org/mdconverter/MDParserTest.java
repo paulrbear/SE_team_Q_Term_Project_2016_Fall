@@ -1,8 +1,9 @@
-package test;
+package org.mdconverter;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import main.MDParser;
+import org.mdconverter.MDParser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,5 @@
-package main;
+package org.mdconverter;
+
 import java.util.Iterator;
 
 

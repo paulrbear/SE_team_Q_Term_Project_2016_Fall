@@ -1,4 +1,4 @@
-package main;
+package org.mdconverter;
 public class BlockToken extends Token{
 
 	public enum TokenStyle{

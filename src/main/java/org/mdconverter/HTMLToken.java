@@ -1,4 +1,4 @@
-package main;
+package org.mdconverter;
 public class HTMLToken extends Token {
 
 	public HTMLToken(String name, String dir){

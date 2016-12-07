@@ -1,25 +1,25 @@
-package main;
+package org.mdconverter;
 import java.util.ArrayList;
 
-class ItemListNode extends Node{
+class HeaderNode extends Node{
 	public enum NodeStyle{
-		Ordered, Unordered;
+		H1, H2, H3, H4, H5, H6;
 	}
 	public NodeStyle nodeStyle;
 	
-	public ItemListNode(String str,NodeStyle style){
+	public HeaderNode(String str, NodeStyle style){
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		setStyle(style);
 		nodeParse();
 	}
-	private void setStyle(NodeStyle style){
+	public void setStyle(NodeStyle style){
 		nodeStyle= style;
 	}
 	public NodeStyle getStyle(){
 		return nodeStyle;
 	}
 	public void accept(Visitor v){
-		v.visitItemListNode(this);
+		v.visitHeaderNode(this);
 	}
 }

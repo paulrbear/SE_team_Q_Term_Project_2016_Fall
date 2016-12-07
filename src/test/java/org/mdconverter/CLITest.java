@@ -1,35 +1,39 @@
 package org.mdconverter;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
+import org.junit.*;
 
 import org.mdconverter.CLI;
 
 public class CLITest {
-
-	@Test
-	public void inputParserTest(){
-		CLI cli = new CLI();
+	
+	String[] input;
+	
+	
+	//$ test.md -p test
+	@Before
+	public void initialize(){
+		input[0] = "test.md";
+		input[1] = "-p";
+		input[2] = "test";
+		//CLI cli = new CLI(input);
 	}
 	@Test
-	public void makeFileTest(){
-		CLI cli = new CLI();
+	public void inputParserTest(){	
+		CLI cli = mock(CLI.class);
+		cli.CLI(input);
+		
+		
 	}
-	@Test
-	public void orderCheckTest(){
-		CLI cli = new CLI();
-	}
-	@Test
-	public void setOutputFilenameTest(){
-		CLI cli = new CLI();
-	}
-	@Test
-	public void setStyleTest(){
-		CLI cli = new CLI();
-	}
-	@Test
-	public void fileWriteTest(){
-		CLI cli = new CLI();
+	@After
+	public void deinitialize(){
+		input = null;
 	}
 	
+	
+	
+	
 }
+//check if method was called:
+//verify(mockedObject, times(1)).methodToValidate();

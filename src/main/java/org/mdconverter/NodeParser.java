@@ -13,13 +13,6 @@ public class NodeParser{
 		PLAIN, EM, STRONG, HTML, LINK, IMAGE, ORDERED_LIST, UNORDERED_LIST, HEADER, Q_BLOCK, LISTED_ITEM;	
 	}
 	
-//	private static String buffer;
-//	private static String current;
-//	private static String leftover;
-//	public static ArrayList<String> parseString = new ArrayList<>();
-	
-//	private static boolean bold;
-//	private static boolean italic;
 	
 	
 	////////////////////////Constructor//////////////////////
@@ -50,30 +43,34 @@ public class NodeParser{
 		
 		try {
 			while((bufferstr=br.readLine()) != null ){
-				Pattern ulP1 = Pattern.compile("^[ ]?[+]{1}");
-				Pattern ulP2 = Pattern.compile("^[ ]?[-]{1}");
+				// pattern & matcher define by regular expression
+				Pattern ulP1 = Pattern.compile("^[ ]?[+]{1}");  // unordered list
+				Pattern ulP2 = Pattern.compile("^[ ]?[-]{1}"); 	
 				Pattern ulP3 = Pattern.compile("^[ ]?[*]{1}");
 				Matcher ulM1 = ulP1.matcher(bufferstr);
 				Matcher ulM2 = ulP2.matcher(bufferstr);
 				Matcher ulM3 = ulP3.matcher(bufferstr);
 				
-				Pattern olP = Pattern.compile("^[ ]?[0-9]+[.]{1}");
+				Pattern olP = Pattern.compile("^[ ]?[0-9]+[.]{1}"); //ordered list
 				Matcher olM = olP.matcher(bufferstr);
 				
-				Pattern qbP = Pattern.compile("^[ ]?[>]{1}");
+				Pattern qbP = Pattern.compile("^[ ]?[>]{1}");	// quoted block
 				Matcher qbM = qbP.matcher(bufferstr); 
 				
-				Pattern strongP = Pattern.compile("[*]{2}[^*]+[*]{2}");
+				Pattern strongP = Pattern.compile("[*]{2}[^*]+[*]{2}");	//strong type
 				Pattern strongP2 = Pattern.compile("[_]{2}[^_]+[_]{2}");
 				Matcher strongM = strongP.matcher(bufferstr);
 				Matcher strongM2 = strongP2.matcher(bufferstr);
 				
-				Pattern emP = Pattern.compile("[^*]?[*]{1}[^*]+[*]{1}[^*]?");
+				Pattern emP = Pattern.compile("[^*]?[*]{1}[^*]+[*]{1}[^*]?");	//em type
 				Pattern emP2 = Pattern.compile("[^_]?[_]{1}[^_]+[_]{1}[^_]?");
 				Matcher emM = emP.matcher(bufferstr);
 				Matcher emM2 = emP2.matcher(bufferstr);
 				
-				if(ulM1.find()){
+				// if pattern matches with buffered strings
+				// parse it recursively until it meets plain token(pure text)
+				
+				if(ulM1.find()){		// unordered list
 					String[] str2;
 					str2 = bufferstr.split("^[ ]?[+]{1}",2);
 					System.out.println(str2[0]);
@@ -91,19 +88,19 @@ public class NodeParser{
 					System.out.println(str2[1]);
 					createToken(np,str2[1].trim(),TokenType.LISTED_ITEM);
 				}
-				else if(olM.find()){
+				else if(olM.find()){	// ordered list
 					String[] str2;
 					str2 = bufferstr.split("^[ ]?[0-9]+[.]{1}",2);
 					System.out.println(str2[0]);
 					System.out.println(str2[1]);
 					createToken(np,str2[1].trim(),TokenType.LISTED_ITEM);
 				}
-				else if(qbM.find()){
+				else if(qbM.find()){	// quoted block
 					String[] str2;
 					str2 = bufferstr.split("^[ ]?[>]{1}", 1);
 					createToken(np,str2[0],TokenType.Q_BLOCK);
 				}
-				else if(strongM.find()){
+				else if(strongM.find()){	// strong token
 					String[] str2;
 					str2 = bufferstr.split("[*]{2}",3);
 					parser(str2[0],np);
@@ -116,7 +113,7 @@ public class NodeParser{
 					createToken(np,str2[1],TokenType.STRONG); 
 					parser(str2[2],np); 
 				}
-				else if(emM.find()){
+				else if(emM.find()){	// em token
 					String[] str2;
 					str2 = bufferstr.split("[*]{1}",3);
 					parser(str2[0],np);
@@ -129,8 +126,8 @@ public class NodeParser{
 					createToken(np,str2[1],TokenType.EM); 
 					parser(str2[2],np); 
 				}
-				else{
-					System.out.println("12341234 : "+str);
+				// if there is no token identifier, it is plain token
+				else{				
 					createToken(np, bufferstr , TokenType.PLAIN);
 				}
 			
@@ -186,7 +183,7 @@ public class NodeParser{
 		
 		}
 	}
-/*
+/* test code 
 	public static void main(String args[]){
 		Node node = new Node();
 		String str = "+ asdf;lsdkf";

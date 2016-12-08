@@ -1,4 +1,3 @@
-package org.mdconverter;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -167,7 +166,7 @@ public class CLI  {
 		      out.close();
 		      ////////////////////////////////////////////////////////////////
 		    } catch (IOException e) {
-		        System.err.println(e); // ?—?Ÿ¬ê°? ?ˆ?‹¤ë©? ë©”ì‹œì§? ì¶œë ¥
+		        System.err.println(e); // ì—ëŸ¬ê°€ ìˆë‹¤ë©´ ë©”ì‹œì§€ ì¶œë ¥
 		        System.exit(1);
 		    }
 	}

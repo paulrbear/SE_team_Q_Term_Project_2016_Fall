@@ -3,11 +3,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class CLI  {
-	public String outputFile ="";
+	public static String outputFile ="";
 //	public MDParser p = new MDParser( );
-	public int styleVariable=1;
-	public ArrayList<File> filelist = new ArrayList<File>();
+	public static int styleVariable=1;
+	public static ArrayList<File> filelist = new ArrayList<File>();
+	
 	public CLI(String[] input){
+		cliCheck(input);
+	}
+	
+	public static void cliCheck(String[] input){
 		if (input.length == 0) {
 			System.out.println("No input");
 			Help.help();
@@ -21,7 +26,7 @@ public class CLI  {
 		}
 		inputParser(input);
 	}
-	public void inputParser(String[] input){
+	public static void inputParser(String[] input){
 		//Help h = new Help( );
 		
 		int inputIndex=-1;
@@ -105,7 +110,7 @@ public class CLI  {
 		}
 	}
 	
-	private void makeFile() {
+	private static void makeFile() {
 		try {
 			File file = new File(outputFile);
 			if (file.exists()) {
@@ -119,7 +124,7 @@ public class CLI  {
 		System.out.println(outputFile+" is created.");
 	}
 
-	private boolean orderCheck(int inputIndex, int styleIndex, int outputIndex) {
+	private static boolean orderCheck(int inputIndex, int styleIndex, int outputIndex) {
 		
 		if (styleIndex == -1){
 			return inputIndex < outputIndex;
@@ -130,7 +135,7 @@ public class CLI  {
 		
 	}
 
-	private void setOutputFilename(String string) {
+	private static void setOutputFilename(String string) {
 		// TODO Auto-generated method stub
 		if((string.length() >= 5) && string.substring(string.length()-5, string.length()).equals(".html")){
 			outputFile=string;
@@ -140,7 +145,7 @@ public class CLI  {
 		
 	}
 
-	private void setStyle(String string) {
+	public static void setStyle(String string) {
 		switch(string){
 		case "-p": //plain option
 			styleVariable=1;

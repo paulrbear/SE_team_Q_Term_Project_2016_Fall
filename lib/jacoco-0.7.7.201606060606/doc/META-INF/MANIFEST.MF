@@ -1,0 +1,79 @@
+Manifest-Version: 1.0
+Created-By: 1.5.0_22 (Sun Microsystems Inc.)
+
+Name: examples/build/pom-offline.xml
+SHA1-Digest: AdmDHlBHxeVzjz7cimiRlYJQzHA=
+
+Name: examples/java/ExecDump.java
+SHA1-Digest: s7JVorWITE2v0xp4hE6yvJw6S24=
+
+Name: examples/java/ExecutionDataServer.java
+SHA1-Digest: KHnA7DNFxyMsvmfoP+nbfLZI+pQ=
+
+Name: examples/build/src/main/java/org/jacoco/examples/expressions/Mul
+ .java
+SHA1-Digest: PoUx3KqrSNIIk5TrKXi7jjuyb3I=
+
+Name: examples/build/src/main/java/org/jacoco/examples/expressions/Div
+ .java
+SHA1-Digest: hV/wuj4ojS+sJef54afwX+I2PYQ=
+
+Name: examples/java/ReportGenerator.java
+SHA1-Digest: /KxOm0euknalqgaDR3BzDs3g7+E=
+
+Name: examples/java/ClassInfo.java
+SHA1-Digest: cIP/yJOWkkL5WNMqNlSgWG+Trpg=
+
+Name: examples/build/src/test/java/org/jacoco/examples/parser/Expressi
+ onParserTest.java
+SHA1-Digest: OBl+/mt5Ai5uwgET3oVpW7+XPFk=
+
+Name: examples/build/build.xml
+SHA1-Digest: I9Tuqv4uOPKXOtt+0PAc3zD1YAA=
+
+Name: examples/build/src/main/java/org/jacoco/examples/expressions/Add
+ .java
+SHA1-Digest: gclW2nyzirh0tHrrUYcAEbVStW0=
+
+Name: examples/build/pom.xml
+SHA1-Digest: 0SHSKcpMI9Vzc1YsvGbYG+lANtE=
+
+Name: examples/java/MBeanClient.java
+SHA1-Digest: e3lB+17UiaBb20+DpXMs+yM/hJ8=
+
+Name: examples/build/build-offline.xml
+SHA1-Digest: Dl+uPR8nfi8mucO94kQ7Wnikz98=
+
+Name: examples/build/src/test/java/org/jacoco/examples/parser/Expressi
+ onParserIT.java
+SHA1-Digest: jM3IW3uj/wmhHhTNHKA+op01ca0=
+
+Name: examples/build/src/main/java/org/jacoco/examples/expressions/Sub
+ .java
+SHA1-Digest: Gx4B/SBKt5G4eVCfvGIBUoRRweI=
+
+Name: examples/build/pom-it.xml
+SHA1-Digest: z3kpVkoE+nKJTLdE+Ct6XvkfsBg=
+
+Name: examples/build/src/main/java/org/jacoco/examples/expressions/Con
+ st.java
+SHA1-Digest: umtaHl/XZawJ+Ehnnp5ArrOALCs=
+
+Name: examples/build/src/main/java/org/jacoco/examples/parser/Main.jav
+ a
+SHA1-Digest: RzWBQJtHHzk9nk74SKvTkwyG0fo=
+
+Name: examples/build/src/main/java/org/jacoco/examples/parser/Expressi
+ onParser.java
+SHA1-Digest: mWENFEzHHol3AsKuHJVDbLiX0Pk=
+
+Name: examples/java/ExecutionDataClient.java
+SHA1-Digest: cyLaavCW6W2dw0WXd2FJHrJeUfc=
+
+Name: examples/java/CoreTutorial.java
+SHA1-Digest: K2rBvM7gUtjfuX4FYhlkXc9SaA8=
+
+Name: examples/build/src/main/java/org/jacoco/examples/expressions/IEx
+ pression.java
+SHA1-Digest: K0uv6xj8ZkM46hmMGfabxX9fwb4=
+

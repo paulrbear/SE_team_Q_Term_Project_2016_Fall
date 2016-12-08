@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+@SuppressWarnings("unused")
 public class MDParser{
 	
 // ATTRIBTUES
@@ -428,9 +428,11 @@ public class MDParser{
 				
 				if(headerM1.find()){						// when header identifier is found
 					int n = 0;
-					while(bufferLine.startsWith("#")){		// delete '#'
-						bufferLine = bufferLine.substring(1);
-						n++;
+					for(int i=0;i<6;i++){
+						if(bufferLine.startsWith("#")){		// delete '#'
+							bufferLine = bufferLine.substring(1);
+							n++;
+						}
 					}
 					while(bufferLine.startsWith(" ")){		// delete white space before the character
 						bufferLine = bufferLine.substring(1);

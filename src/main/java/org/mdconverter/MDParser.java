@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("unused")
+
 public class MDParser{
 	
 // ATTRIBTUES
@@ -459,7 +459,7 @@ public class MDParser{
 					}
 					while(bufferLine.startsWith(">"))bufferLine = bufferLine.substring(1);
 					while(bufferLine.startsWith(" "))bufferLine = bufferLine.substring(1);
-					innerBuffer = innerBuffer + bufferLine + "<br>\n";
+					innerBuffer = innerBuffer + bufferLine + " \n";
 				}else if(ulM1.find()){
 					if(type!=NodeType.UL_ITEM){					//start of node
 						if(!(innerBuffer=="")){					// buffer control 
@@ -513,7 +513,7 @@ public class MDParser{
 						}
 						type = NodeType.BLOCK;
 					}
-					innerBuffer = innerBuffer + bufferLine + "<br>\n";
+					innerBuffer = innerBuffer + bufferLine + " \n";
 				}
 			}
 			if(!(innerBuffer=="")){					// buffer control 

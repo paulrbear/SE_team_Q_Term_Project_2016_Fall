@@ -7,21 +7,14 @@ class HeaderNode extends Node{
 	}
 	public NodeStyle nodeStyle;
 	public int headerSize;
-	public HeaderNode(String str, NodeStyle style){
-		nodeString = str;
-		tokens=new ArrayList<Node>();
-		setStyle(style);
-		nodeParse();
-	}
+
 	public HeaderNode(String str, int style){
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		setStyle(style);
 		nodeParse();
 	}
-	public void setStyle(NodeStyle ns){
-		nodeStyle = ns ; 
-	}
+
 	public void setStyle(int style){
 		switch(style){
 		

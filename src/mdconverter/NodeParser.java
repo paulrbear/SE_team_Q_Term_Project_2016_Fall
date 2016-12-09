@@ -238,16 +238,7 @@ public class NodeParser{
 			node = new ItalicToken(s);
 			np.tokens.add(node);
 			break;
-		case HEADER:
-			break;
-		case HTML:
-			break;
-		case IMAGE:
-			break;
-		case UNORDERED_LIST:
-			node = new ItemListNode(s,ItemListNode.NodeStyle.Unordered);
-			np.tokens.add(node);
-			break;
+
 		case LISTED_ITEM:
 			node = new ListedItem(s);
 			np.tokens.add(node);
@@ -259,8 +250,6 @@ public class NodeParser{
 		case LIST_NESTED_ORDERED:
 			node = new ItemListNode(s,ItemListNode.NodeStyle.Ordered);
 			np.tokens.add(node);
-			break;
-		case LINK:
 			break;
 		case PLAIN:
 			node = new PlainToken(s);

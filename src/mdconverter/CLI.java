@@ -8,26 +8,22 @@ public class CLI  {
 	public static int styleVariable=1;
 	public static ArrayList<File> filelist = new ArrayList<File>();
 	
-	public CLI(String[] input){
+	public CLI(String[] input) throws IOException{
 		cliCheck(input);
 	}
 	
-	public static boolean cliCheck(String[] input){
+	public static void cliCheck(String[] input) throws IOException{
 		if (input.length == 0) {
-			 
-
-			return false;
+			Help.help();
 		}
 		if(input.length == 1){
 			if(input[0] .equals("help") || input[0] == "-h") {
 				Help.help();
-				return false;
 			}
 		}
 		inputParser(input);
-		return false;
 	}
-	public static void inputParser(String[] input){
+	public static void inputParser(String[] input) throws IOException{
 		//Help h = new Help( );
 		
 		int inputIndex=-1;
@@ -136,7 +132,6 @@ public class CLI  {
 		
 	}
 	
-
 	private static void setOutputFilename(String string) {
 		// TODO Auto-generated method stub
 		if((string.length() >= 5) && string.substring(string.length()-5, string.length()).equals(".html")){
@@ -155,7 +150,7 @@ public class CLI  {
 	public String getOutputFile(){
 		return outputFile;
 	}
-	public static void setStyle(String string) {
+	public static void setStyle(String string) throws IOException {
 		switch(string){
 		case "-p": //plain option
 			styleVariable=1;
@@ -172,18 +167,5 @@ public class CLI  {
 			System.exit(0);
 	}
 		
-	}
-
-	public void fileWrite(String HTMLCode,String fileName){
-		try {
-		      ////////////////////////////////////////////////////////////////
-		      BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
-		      out.write(HTMLCode);
-		      out.close();
-		      ////////////////////////////////////////////////////////////////
-		    } catch (IOException e) {
-		        System.err.println(e); // ?��?���? ?��?���? 메시�? 출력
-		        System.exit(1);
-		    }
 	}
 }

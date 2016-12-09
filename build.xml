@@ -1,95 +1,123 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-
-<project name="MD Converter" default="compile" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
-
-    <description>
-        Build file for this project-Markdown Converter
-    </description>
-  
-    <!-- global properties-->
-    <property name="source.dir" location="src/mdconverter"/>
-    <property name="source_test.dir" location="src/test"/>
-    <property name="bin.dir" location="bin"/>
-    <property name="test.dir" location="test"/>
-    <property name="lib.dir" location="lib"/>
-    <property name="report.dir" location="report"/>
-
-<path id="build-classpath">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="junitreport" name="Finalproject" xmlns:jacoco="antlib:org.jacoco.ant">
+    <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="jacoco.output.dir" value="jacoco"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+    	<classpath path="lib/jacocoant.jar"/>
+    </taskdef>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="../../../.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
+    <path id="Finalproject.classpath">
         <pathelement location="bin"/>
-        <pathelement location="${lib.dir}/jtidy-r938/jtidy-r938.jar"/>
-        <pathelement location="${lib.dir}/junit-4.12.jar"/>
-        <pathelement location="${lib.dir}/hamcrest-core-1.3.jar"/>
-        <pathelement location="${lib.dir}/jacocoant.jar"/>
-        <pathelement location="${lib.dir}/mockito-core-2.2.9.jar"/>
-</path>
-
-<path id="test-classpath">
-        <pathelement location="test"/>
-        <pathelement location="${lib.dir}/jtidy-r938.jar"/>
-        <pathelement location="${lib.dir}/junit-4.12.jar"/>
-        <pathelement location="${lib.dir}/hamcrest-core-1.3.jar"/>
-        <pathelement location="${lib.dir}/jacocoant.jar"/>
-        <pathelement location="${lib.dir}/mockito-core-2.2.9.jar"/>
-</path>
-
-
-<path id="build.classpath">
-  <fileset dir="${lib.dir}">
-     <include name="**/*.jar"/>
-  </fileset>
-</path>
-
-<pathconvert property="manifest.classpath" pathsep=" ">
-  <path refid="build.classpath"/>
-  <mapper>
-    <chainedmapper>
-       <flattenmapper/>
-       <globmapper from="*.jar" to="lib/*.jar"/>
-    </chainedmapper>
-  </mapper>
-</pathconvert>
-
-
-
-    <!-- set up some directories used by this project -->
-    <target name="init" description="setup project directories">
-        <mkdir dir="${bin.dir}"/>
-        <mkdir dir="${test.dir}"/>
-        <mkdir dir="${report.dir}"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="lib/jacocoant.jar"/>
+        <pathelement location="lib/jtidy-r938.jar"/>
+        <pathelement location="lib/system-rules-1.16.0.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
     </target>
-
-    <!-- Compile the java code in ${source.dir} into ${build.dir}-->
-    <target name="compile" depends="init" description="compile java sources">
-        <javac srcdir="${source.dir}" destdir="${bin.dir}" debug="true" >
-            <classpath refid="build.classpath" />
-        </javac>
-
-        <javac srcdir="${source_test.dir}" destdir="${test.dir}" debug="true">
-            <classpath refid="build.classpath" />
-        </javac>
-    <jar jarfile="${basedir}/converter.jar">
-        <fileset dir="${bin.dir}" />
-        <manifest>
-           <attribute name="Main-Class" value="mdconverter.MDConverter"/>
-           <attribute name="Class-Path" value="${manifest.classpath}"/>
-        </manifest>
-    </jar>
-</target>
-
-
-    <target name="execute" depends="compile" description="run the project">
-     <exec executable="java">
-       <arg line="-classpath ${basedir}/converter.jar"/>
-     </exec>
-  </target>
-
-    <!-- Delete the build, test, &result directories and Emacs backup (*~) files -->
-    <target name="clean" description="tidy up the workspace">
-        <delete dir="${build.dir}"/>
-        <delete dir="${test.dir}"/>
-        <delete dir="${report.dir}"/>
+    <target name="clean">
+        <delete dir="bin"/>
     </target>
-
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Finalproject.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target depends="build" name="AllTests">
+    	<mkdir dir="${jacoco.output.dir}"/>
+        <jacoco:coverage>
+	        
+	        <junit fork="yes" printsummary="withOutAndErr">
+	            <formatter type="xml"/>
+	            <test name="test.AllTests" todir="${junit.output.dir}"/>
+	            <jvmarg line="-ea"/>
+	            <classpath refid="Finalproject.classpath"/>
+	        </junit>
+	    </jacoco:coverage>
+    </target>
+    <target name="CLITest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.CLITest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="Finalproject.classpath"/>
+        </junit>
+    </target>
+    <target name="CLITest.testCLI">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.CLITest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="Finalproject.classpath"/>
+        </junit>
+    </target>
+    <target name="MDConverterTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.MDConverterTest" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="Finalproject.classpath"/>
+        </junit>
+    </target>
+    <target depends="AllTests" name="junitreport">
+        <mkdir dir="${junit.output.dir}/classes"/>
+		<jacoco:report>
+		                        
+		    <executiondata>
+		        <file file="jacoco.exec"/>
+		    </executiondata>
+		                        
+		    <structure name="FinalProject">
+		        <classfiles>
+		            <fileset dir="bin"/>
+		        </classfiles>
+		        <sourcefiles encoding="UTF-8">
+		            <fileset dir="src"/>
+		        </sourcefiles>
+		    </structure>
+		                        
+		    <html destdir="report"/>
+		                        
+		</jacoco:report>
+ 
+    </target>
 </project>
-

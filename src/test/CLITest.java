@@ -38,6 +38,16 @@ public class CLITest {
 		CLI.cliCheck(args);	
 	}
 	@Test
+	public void goodArgs2() throws IOException{
+		String[] args = {"test.md","-f","output01"};
+		CLI.cliCheck(args);	
+	}
+	@Test
+	public void goodArgs3() throws IOException{
+		String[] args = {"test.md","-s","output02"};
+		CLI.cliCheck(args);	
+	}
+	@Test
 	public void help () throws Exception{
 		String[] args = {"help"};
 		exit.expectSystemExitWithStatus(1);
@@ -55,6 +65,7 @@ public class CLITest {
 		exit.expectSystemExitWithStatus(1);
 		CLI.cliCheck(args);
 	}
+	
 	@Test
 	public void multipleOutput() throws IOException{
 		String[] args = {"nofile.md","-p","output4","output5"};

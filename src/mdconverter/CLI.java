@@ -60,15 +60,15 @@ public class CLI  {
 					if (
 						 //input[i].contains("\u003C") || // <
 						 //input[i].contains("\u003D") || // >
-						 input[i].contains("\u003A") || // :
+						 input[i].contains("[:]") || // :
 						 input[i].contains("\"") || // "
 						 //\u0022
-						 input[i].contains("\u002F") || // /
+						 input[i].contains("\\\\") || // /
 						 input[i].contains("\\") || // \
 						 //\u005C
 						 //input[i].contains("\u007C") || // |
-						 input[i].contains("\u003F") || // ?
-						 input[i].contains("\u002A") ) // *
+						 input[i].contains("?") || // ?
+						 input[i].contains("[*]") ) // *
 					 {
 						System.out.println("Invalid character in output file name");
 						System.out.println("Refrain from using the following characters: \u003C \u003D \u003A \" \u002F \\ \u003F \u002A \n");
@@ -91,10 +91,7 @@ public class CLI  {
 					Help.help();
 				}
 			}
-			else{
-				System.out.println("Wrong syntax.");
-				Help.help();
-			}
+			
 		}
 		order = orderCheck(inputIndex,styleIndex,outputIndex);
 		

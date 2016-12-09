@@ -51,7 +51,7 @@ public class CLITest {
 	}
 	@Test
 	public void multipleOption() throws IOException{
-		String[] args = {"nofile.md","-d","-f"};
+		String[] args = {"test.md","-d","-f"};
 		exit.expectSystemExitWithStatus(1);
 		CLI.cliCheck(args);
 	}
@@ -75,7 +75,7 @@ public class CLITest {
 	}
 	@Test
 	public void illegalFile() throws IOException{
-		String[] args = {"asdf.md","-p","#$!<"};
+		String[] args = {"test.md","-p","?asd"};
 		exit.expectSystemExitWithStatus(1);
 		CLI.cliCheck(args);
 	}

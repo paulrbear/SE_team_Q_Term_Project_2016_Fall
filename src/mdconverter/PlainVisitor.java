@@ -71,7 +71,6 @@ public class PlainVisitor implements Visitor{
 			htmlCode = htmlCode + "</ul>\n";
 			break;
 		default:
-			System.out.println("error!!");
 			break;
 		}
 	}

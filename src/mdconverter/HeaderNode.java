@@ -32,17 +32,13 @@ class HeaderNode extends Node{
 			break;
 		case 5:
 			nodeStyle = NodeStyle.H5;
-			break; 
-		case 6:
-			nodeStyle = NodeStyle.H6;
-			break;
+			break; 	
 		default:
+			nodeStyle = NodeStyle.H6;
 			break;
 		}
 	}
-	public NodeStyle getStyle(){
-		return nodeStyle;
-	}
+
 	public void accept(Visitor v){
 		v.visitHeaderNode(this);
 	}

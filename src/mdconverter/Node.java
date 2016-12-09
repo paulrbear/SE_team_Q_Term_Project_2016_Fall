@@ -22,10 +22,11 @@ public class Node implements nodeInterface{
 	public ArrayList<Node> getTokens(){
 		return tokens;
 	}
-*/	
+*/
 	@Override
 	public void accept(Visitor v) {
 		// TODO Auto-generated method stub
 		
-	}
+	}	
+
 }

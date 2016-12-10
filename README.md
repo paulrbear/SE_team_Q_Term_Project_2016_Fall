@@ -1,5 +1,7 @@
 #### Q_CONVERTER - README 
 
+
+
 ## /SYNOPSIS/
 > Simply run and convert!
 > QCumver is an easy and free MD(Markdown)-to-HTML converter. All you need to do 
@@ -9,9 +11,11 @@
 > JUnit test and JaCoCo. 
 > Q_CONVERTER is 100% open source so you can folk the code and contribute! 
 
+
+
 ## /README/
 * Input Format 
-> 	in_filename.md  -style  out_filename.html 
+> 	[in_filename.md]   [-style]   [out_filename.html] 
 > 
 > There can be one or more input files. 
 > At the end, there should be one output file's name and its type (.html).
@@ -28,8 +32,8 @@
 >	[ -h ]	or [ help ] : "help"; shows help text. 
 
 * More Regulations
- 1. Filename only comprises of characters from the ACSII code.
- 	It cannot contain any other characters. 
+ 1. Filenames only comprise of characters from the ACSII code. It cannot contain any other characters. 
+ > test1.md   123df.html    $!@%@#.md (incorrect)
  2. Input and output filename cannot contain any white-space. 
  3. Incoming file and outgoing file's names should be followed
  	by a file type.
@@ -40,6 +44,13 @@
  7. These characters are invalid for filename: [ < > : " / \ | ? * ]
  8. These strings are invalid for filename (SYSTEM regulation): [ CON, PRN, AUX, NUL ] 
  9. Only one option for Style is available.
+ 
+ 
+ 
+## /TEST COVERAGE/
+* JUnit & JaCoCo
+> Runninng the build file, the program's branch coverage is examined in a report. 
+
 
 
 ## /CONTRIBUTORS/

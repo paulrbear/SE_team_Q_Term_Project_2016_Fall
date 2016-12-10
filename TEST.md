@@ -1,84 +1,72 @@
-###### this is test code! 
+###### This is md file for testing
 
-# h1
-## h2 
-different style of h1
-=====
+1. Header type 1
+# header 1
+## header 2
+### header 3
+#### header 4
+##### header 5
+###### header 6
 
-headerheader
-------------
+2. Header type 2
+header 1
+====
+header 2
+-----
 
-### h3
+1. list test1
+Should be in same line as previous line
+ 1. embedded list test1
+ 2. embedded list test2
+2. list test2
+ 1. embedded list test3
+3. list test3
++ list test4
++ list test5
+* list test6
+* list test7
+- list test8
+- list test9
 
-#### h4
 
-##### h5
+    Code block with 4 spaces
+	Code block with tab
 
-asdfasdf
-	* asdf
+> This is quoted block
+same block
+> second one
+>> third one
 
-1. asdf
-    * nested
-    * one
-  
-* asdf
-* dfha
-	* nested
-	* list
-	1. nested2
-	2. list2
 
-+ asdf
+Same line as previous line
 
-- asdf
-- asdf
+This is node block with plain text.
 
-asdffhdsdfassd
 
-asd*em1*sdf
-asdf_em2_asdf
-asdfkd**this is strong test1**as
 
-sdfad__strong2__asdff
+<a href = "hisnet.handong.edu">Hisnet</a>
 
-> quoted
-> quoted33
-> quoted6134
+*This is emphasis*
+_This is emphasis2_
 
-<table> <tr>
-<td>Foo</td><td>Foo2</td></tr>
-</table>
+**This is strong**
+__This is strong__
 
-	this is code block node
-	code
-	block
-	node
+abc*testing*yes
+def_testing again*y
+ghi**testing**yes
+jkl__testing trials__yeah
 
-    spacebar
-    4times
-    pushed
 
-* * *
+** ** **
+* * * * *
+Those two lines above are horizontal rules.
 
-***
+* * should not be horizontal rule
 
-*****
+<&lt>
+&amp
 
-- - - 
-
-----------------------------------------
-
-backslash test \{ \! \* \' \< \& \# \. \) \( \\
-
-sdfkasdf
-+ asdf
-
-asdfkkdkfjaasdjjfjklsdf
-1. asdf
-
-slkjfaklsdjflasdfkjlf
-- asdf
-- kkdf
-
-akdkkfjdf
-* kkdkf
+\\\\\\!
+\\\\\\. \\\\\\#
+\\\\\\( \\\\\\)

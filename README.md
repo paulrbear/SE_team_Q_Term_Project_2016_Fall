@@ -33,7 +33,6 @@
 
 * More Regulations
  1. Filenames only comprise of characters from the ACSII code. It cannot contain any other characters. 
- > test1.md   123df.html    $!@%@#.md (incorrect)
  2. Input and output filename cannot contain any white-space. 
  3. Incoming file and outgoing file's names should be followed
  	by a file type.

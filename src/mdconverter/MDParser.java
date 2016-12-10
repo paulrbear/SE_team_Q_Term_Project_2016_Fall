@@ -42,9 +42,7 @@ public class MDParser{
 	
 	
 // CONSTRUCTOR
-	public MDParser() {
-		//default constructor
-	}
+
 	public MDParser(File file)
 	{
 		parser2(file);
@@ -234,7 +232,6 @@ public class MDParser{
 							}
 							type = NodeType.CODEBLOCK;
 						}
-						System.out.println("code block : " + bufferLine);
 						innerBuffer = innerBuffer + bufferLine.trim() + "\n";
 					}
 				}else if(codeblockM2.find()){

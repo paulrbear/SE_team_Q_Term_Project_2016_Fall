@@ -15,14 +15,7 @@ public class NodeParser{
 	
 	
 	
-	////////////////////////Constructor//////////////////////
-	public NodeParser(Node np){
-		if(np.nodeString!=null){
-			nodeStringParser(np);	
-		}else if(np.nodeString==null){
-			System.out.printf("nodeString is empty (nodeStringParser)");
-		}	
-	}
+
 	
 	/////////////////////////Parser///////////////////////////
 	public static void nodeStringParser(Node np){
@@ -52,7 +45,7 @@ public class NodeParser{
 				Pattern olP = Pattern.compile("^[ ]?[0-9][.]{1}"); //ordered list
 				Matcher olM = olP.matcher(bufferstr);
 				
-				Pattern qbP = Pattern.compile("^[ ]?[>]{1}");	// quoted block
+				Pattern qbP = Pattern.compile("^[>]{1}");	// quoted block
 				Matcher qbM = qbP.matcher(bufferstr); 
 				
 				Pattern strongP = Pattern.compile("[*]{2}[^*]+[*]{2}");	//strong type
@@ -83,19 +76,11 @@ public class NodeParser{
 				if(ulM1.find()){		// unordered list
 					String[] str2;
 					str2 = bufferstr.split("^[ ]?[+]{1}",2);
-					if(!(buffer2=="")){
-						createToken(np,buffer2,toggle);
-						buffer2="";
-					}
 					toggle = TokenType.LISTED_ITEM;
 					createToken(np,str2[1].trim(),toggle);
 				}else if(ulM2.find()){
 					String[] str2;
 					str2 = bufferstr.split("^[ ]?[-]{1}",2);
-					if(!(buffer2=="")){
-						createToken(np,buffer2,toggle);
-						buffer2="";
-					}
 					toggle = TokenType.LISTED_ITEM;
 					createToken(np,str2[1].trim(),toggle);
 				}else if(ulM3.find()){
@@ -103,10 +88,6 @@ public class NodeParser{
 					str2 = bufferstr.split("^[ ]?[*]{1}",2);
 					System.out.println(str2[0]);
 					System.out.println(str2[1]);
-					if(!(buffer2=="")){
-						createToken(np,buffer2,toggle);
-						buffer2="";
-					}
 					toggle = TokenType.LISTED_ITEM;
 					createToken(np,str2[1].trim(),toggle);
 				}
@@ -223,7 +204,7 @@ public class NodeParser{
 				buffer2="";
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			
 		}
 	}
 
@@ -238,16 +219,7 @@ public class NodeParser{
 			node = new ItalicToken(s);
 			np.tokens.add(node);
 			break;
-		case HEADER:
-			break;
-		case HTML:
-			break;
-		case IMAGE:
-			break;
-		case UNORDERED_LIST:
-			node = new ItemListNode(s,ItemListNode.NodeStyle.Unordered);
-			np.tokens.add(node);
-			break;
+
 		case LISTED_ITEM:
 			node = new ListedItem(s);
 			np.tokens.add(node);
@@ -259,8 +231,6 @@ public class NodeParser{
 		case LIST_NESTED_ORDERED:
 			node = new ItemListNode(s,ItemListNode.NodeStyle.Ordered);
 			np.tokens.add(node);
-			break;
-		case LINK:
 			break;
 		case PLAIN:
 			node = new PlainToken(s);

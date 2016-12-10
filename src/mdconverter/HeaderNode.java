@@ -7,21 +7,14 @@ class HeaderNode extends Node{
 	}
 	public NodeStyle nodeStyle;
 	public int headerSize;
-	public HeaderNode(String str, NodeStyle style){
-		nodeString = str;
-		tokens=new ArrayList<Node>();
-		setStyle(style);
-		nodeParse();
-	}
+
 	public HeaderNode(String str, int style){
 		nodeString = str;
 		tokens=new ArrayList<Node>();
 		setStyle(style);
 		nodeParse();
 	}
-	public void setStyle(NodeStyle ns){
-		nodeStyle = ns ; 
-	}
+
 	public void setStyle(int style){
 		switch(style){
 		
@@ -39,17 +32,13 @@ class HeaderNode extends Node{
 			break;
 		case 5:
 			nodeStyle = NodeStyle.H5;
-			break; 
-		case 6:
-			nodeStyle = NodeStyle.H6;
-			break;
+			break; 	
 		default:
+			nodeStyle = NodeStyle.H6;
 			break;
 		}
 	}
-	public NodeStyle getStyle(){
-		return nodeStyle;
-	}
+
 	public void accept(Visitor v){
 		v.visitHeaderNode(this);
 	}

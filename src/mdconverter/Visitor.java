@@ -5,14 +5,13 @@ public interface Visitor {
 	public void visitItemListNode(ItemListNode in);
 	public void visitBlockNode(BlockNode bn);
 	public void visitQBlockNode(QuotedBlockNode qbn);
-	public void visitHRNode(HorizonRuleNode hrn);
 	public void visitListedItem(ListedItem li);
 	public void visitCodeBlockNode(CodeBlockNode cbn);
 	
 	//Token
-	public void visitCodeToken(CodeToken ct);
-	public void visitImageToken(ImageToken it, ImageToken dir);
-	public void visitHTMLToken(HTMLToken ht, HTMLToken dir);
+//	public void visitCodeToken(CodeToken ct);
+//	public void visitImageToken(ImageToken it, ImageToken dir);
+//	public void visitHTMLToken(HTMLToken ht, HTMLToken dir);
 		//Block -> multiple
 		public void visitPlainToken(PlainToken pt);
 		public void visitBoldToken(BoldToken bt);

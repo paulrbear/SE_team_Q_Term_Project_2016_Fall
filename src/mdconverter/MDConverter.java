@@ -10,7 +10,7 @@ import java.io.InputStream;
 import org.w3c.tidy.Tidy;
 
 public class MDConverter{
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		CLI cli = new CLI(args);
 		MDParser p = new MDParser(cli.getFileList().get(0)); //TODO : multiple input

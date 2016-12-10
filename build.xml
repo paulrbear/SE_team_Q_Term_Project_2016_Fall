@@ -1,95 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<project name="MD Converter" default="compile" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+  <project basedir="." default="junitreport" name="Finalproject" xmlns:jacoco="antlib:org.jacoco.ant">
 
     <description>
         Build file for this project-Markdown Converter
     </description>
   
-    <!-- global properties-->
+<!-- global properties-->
     <property name="source.dir" location="src/mdconverter"/>
     <property name="source_test.dir" location="src/test"/>
     <property name="bin.dir" location="bin"/>
+    <property name="bin-class.dir" location="bin/mdconverter"/>
     <property name="test.dir" location="test"/>
+    <property name="test-class.dir" location="test/class/test"/>
+
+    
     <property name="lib.dir" location="lib"/>
-    <property name="report.dir" location="report"/>
+    <property name="report.dir" location="test/report"/>
+    <property name="dist.file" value="${dist.dir}/${name}-${version}"/>
 
-<path id="build-classpath">
-        <pathelement location="bin"/>
-        <pathelement location="${lib.dir}/jtidy-r938/jtidy-r938.jar"/>
-        <pathelement location="${lib.dir}/junit-4.12.jar"/>
-        <pathelement location="${lib.dir}/hamcrest-core-1.3.jar"/>
-        <pathelement location="${lib.dir}/jacocoant.jar"/>
-        <pathelement location="${lib.dir}/mockito-core-2.2.9.jar"/>
-</path>
+    <path id="build-classpath">
+      <fileset dir="${lib.dir}">
+         <include name="**/*.jar"/>
+      </fileset>
+    </path>
 
-<path id="test-classpath">
-        <pathelement location="test"/>
-        <pathelement location="${lib.dir}/jtidy-r938.jar"/>
-        <pathelement location="${lib.dir}/junit-4.12.jar"/>
-        <pathelement location="${lib.dir}/hamcrest-core-1.3.jar"/>
-        <pathelement location="${lib.dir}/jacocoant.jar"/>
-        <pathelement location="${lib.dir}/mockito-core-2.2.9.jar"/>
-</path>
+    <path id="build-test-classpath">
+      <fileset dir="${lib.dir}">
+         <include name="**/*.jar"/>
+      </fileset>
+       <pathelement location="${source_test.dir}"/>
+    </path>
 
+    <path id="junit-classpath">
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+        <fileset dir="${basedir}" includes="*.jar"/>
+        <pathelement location="${test-class.dir}"/>
+        <pathelement location="${bin.dir}"/>
+    </path>
 
-<path id="build.classpath">
-  <fileset dir="${lib.dir}">
-     <include name="**/*.jar"/>
-  </fileset>
-</path>
+    <pathconvert property="manifest-classpath" pathsep=" ">
+      <path refid="build-classpath"/>
+      <mapper>
+        <chainedmapper>
+           <flattenmapper/>
+           <globmapper from="*.jar" to="lib/*.jar"/>
+        </chainedmapper>
+      </mapper>
+    </pathconvert>
 
-<pathconvert property="manifest.classpath" pathsep=" ">
-  <path refid="build.classpath"/>
-  <mapper>
-    <chainedmapper>
-       <flattenmapper/>
-       <globmapper from="*.jar" to="lib/*.jar"/>
-    </chainedmapper>
-  </mapper>
-</pathconvert>
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="${lib.dir}/jacocoant.jar"/>
+    </taskdef>
 
-
-
-    <!-- set up some directories used by this project -->
+<!-- set up some directories used by this project -->
     <target name="init" description="setup project directories">
         <mkdir dir="${bin.dir}"/>
         <mkdir dir="${test.dir}"/>
+        <mkdir dir="${test-class.dir}"/>
         <mkdir dir="${report.dir}"/>
+
+
     </target>
 
-    <!-- Compile the java code in ${source.dir} into ${build.dir}-->
+
+
+<!-- Compile the java code in ${source.dir} into ${build.dir}-->
     <target name="compile" depends="init" description="compile java sources">
-        <javac srcdir="${source.dir}" destdir="${bin.dir}" debug="true" >
-            <classpath refid="build.classpath" />
+        <javac encoding="UTF-8" srcdir="${source.dir}" destdir="${bin.dir}" debug="true" >
+           <classpath refid="build-classpath" />
         </javac>
 
-        <javac srcdir="${source_test.dir}" destdir="${test.dir}" debug="true">
-            <classpath refid="build.classpath" />
+        <javac encoding="UTF-8" srcdir="${source_test.dir}" destdir="${test-class.dir}" debug="true">
+            <classpath refid="build-classpath" />
+            <classpath path="${bin.dir}"/>
         </javac>
-    <jar jarfile="${basedir}/converter.jar">
-        <fileset dir="${bin.dir}" />
-        <manifest>
-           <attribute name="Main-Class" value="mdconverter.MDConverter"/>
-           <attribute name="Class-Path" value="${manifest.classpath}"/>
-        </manifest>
-    </jar>
+    </target>
+
+<!-- Create a converter jar file-->
+    <target name="jar" depends="compile">
+      <jar jarfile="temp.jar" >
+        <zipgroupfileset dir="${lib.dir}" includes="**/*.jar"/>
+      </jar>
+      <sleep milliseconds="50"/>
+      <jar destfile="converter.jar" basedir="${bin.dir}" >
+      <zipfileset excludes="META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA" src="temp.jar"/>
+      <manifest>
+          <attribute name="Main-Class" value="mdconverter.MDConverter"/>
+          <!--<attribute name="Class-Path" value="${lib.dir}"/>-->
+      </manifest>
+      </jar>
+      <delete file="temp.jar"/>
+    </target>
+
+<target depends="jar" name="AllTests">
+        <jacoco:coverage>
+          
+          <junit fork="yes" printsummary="withOutAndErr">
+              <formatter type="xml"/>
+              <test name="test.AllTests" todir="${junit.output.dir}"/>
+              <jvmarg line="-ea"/>
+              <classpath refid="build-classpath"/>
+              <classpath refid="junit-classpath"/>
+          </junit>
+      </jacoco:coverage>
+    </target>
+<target name="CLITest">
+    <mkdir dir="${junit.output.dir}"/>
+    <junit fork="yes" printsummary="withOutAndErr">
+        <formatter type="xml"/>
+        <test name="test.CLITest" todir="${junit.output.dir}"/>
+        <jvmarg line="-ea"/>
+        <classpath refid="Finalproject.classpath"/>
+    </junit>
+</target>
+<target name="CLITest.testCLI">
+    <mkdir dir="${junit.output.dir}"/>
+    <junit fork="yes" printsummary="withOutAndErr">
+        <formatter type="xml"/>
+        <test name="test.CLITest" todir="${junit.output.dir}"/>
+        <jvmarg line="-ea"/>
+        <classpath refid="Finalproject.classpath"/>
+    </junit>
+</target>
+<target name="MDConverterTest">
+    <mkdir dir="${junit.output.dir}"/>
+    <junit fork="yes" printsummary="withOutAndErr">
+        <formatter type="xml"/>
+        <test name="test.MDConverterTest" todir="${junit.output.dir}"/>
+        <jvmarg line="-ea"/>
+        <classpath refid="Finalproject.classpath"/>
+    </junit>
+</target>
+<target depends="AllTests" name="junitreport">
+<jacoco:report>
+                        
+    <executiondata>
+        <file file="jacoco.exec"/>
+    </executiondata>
+                        
+    <structure name="FinalProject">
+        <classfiles>
+            <fileset dir="bin"/>
+        </classfiles>
+        <sourcefiles encoding="UTF-8">
+            <fileset dir="src"/>
+        </sourcefiles>
+    </structure>
+                        
+    <html destdir="report"/>
+                        
+</jacoco:report>
+
 </target>
 
 
-    <target name="execute" depends="compile" description="run the project">
-     <exec executable="java">
-       <arg line="-classpath ${basedir}/converter.jar"/>
-     </exec>
-  </target>
+ <!-- Delete the build, test, &result directories and Emacs backup (*~) files -->
+<target name="clean" description="tidy up the workspace">
+    <delete dir="${build.dir}"/>
+    <delete dir="${test.dir}"/>
+    <delete dir="report"/>
+    <delete dir="${report.dir}"/>
+    <delete file="output.html"/>
+    <delete file="output0.html" />
+    <delete file="output01.html" />
+    <delete file="output02.html" />
+    <delete file="output6.html" />
+    <delete file="testoutput1.html" />
+    <delete file="jacoco.exec" />
+    <delete file="converter.jar"/>
+    <delete dir="bin"/>
+</target>
 
-    <!-- Delete the build, test, &result directories and Emacs backup (*~) files -->
-    <target name="clean" description="tidy up the workspace">
-        <delete dir="${build.dir}"/>
-        <delete dir="${test.dir}"/>
-        <delete dir="${report.dir}"/>
-    </target>
+
+
+
+
 
 </project>
-

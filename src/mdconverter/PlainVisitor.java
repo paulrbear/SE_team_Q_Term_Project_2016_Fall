@@ -52,7 +52,6 @@ public class PlainVisitor implements Visitor{
 			htmlCode = htmlCode + "</h6>\n";
 			break;
 		default:
-			System.out.println("error!!");
 			break;
 		}
 	}
@@ -72,7 +71,6 @@ public class PlainVisitor implements Visitor{
 			htmlCode = htmlCode + "</ul>\n";
 			break;
 		default:
-			System.out.println("error!!");
 			break;
 		}
 	}
@@ -89,11 +87,7 @@ public class PlainVisitor implements Visitor{
 		while (it.hasNext()) it.next().accept(this);
 		htmlCode = htmlCode + "</q>\n";
 	}
-	public void visitHRNode(HorizonRuleNode hrn) {
-		Iterator<Node> it = hrn.tokens.iterator();
-		htmlCode = htmlCode + "<hr>";
-		while (it.hasNext()) it.next().accept(this);
-	}
+
 	public void visitBoldToken(BoldToken bt) {
 		Iterator<Node> it = bt.tokens.iterator();
 		htmlCode = htmlCode + "<strong>";
@@ -102,24 +96,6 @@ public class PlainVisitor implements Visitor{
 	}
 	public void visitPlainToken(PlainToken pt) {
 		htmlCode = htmlCode + pt.getString();
-	}
-
-	@Override
-	public void visitCodeToken(CodeToken ct) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitImageToken(ImageToken it, ImageToken dir) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitHTMLToken(HTMLToken ht, HTMLToken dir) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

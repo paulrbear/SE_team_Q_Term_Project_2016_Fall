@@ -5,13 +5,33 @@
 different style of h1
 =====
 
+headerheader
+------------
+
+### h3
+
+#### h4
+
+##### h5
+
+asdfasdf
+	* asdf
+
 1. asdf
+    * nested
+    * one
+  
 * asdf
 * dfha
 	* nested
 	* list
 	1. nested2
 	2. list2
+
++ asdf
+
+- asdf
+- asdf
 
 asdffhdsdfassd
 
@@ -34,6 +54,10 @@ sdfad__strong2__asdff
 	block
 	node
 
+    spacebar
+    4times
+    pushed
+
 * * *
 
 ***
@@ -45,3 +69,16 @@ sdfad__strong2__asdff
 ----------------------------------------
 
 backslash test \{ \! \* \' \< \& \# \. \) \( \\
+
+sdfkasdf
++ asdf
+
+asdfkkdkfjaasdjjfjklsdf
+1. asdf
+
+slkjfaklsdjflasdfkjlf
+- asdf
+- kkdf
+
+akdkkfjdf
+* kkdkf

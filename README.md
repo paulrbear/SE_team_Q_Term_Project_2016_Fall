@@ -1,34 +1,33 @@
-# SE_team_Q_Term_Project_2016_Fall
+#### Q_CONVERTER - README 
 
+## /SYNOPSIS/
+> Simply run and convert!
+> QCumver is an easy and free MD(Markdown)-to-HTML converter. All you need to do 
+> is to provide your md file name, file style, and the ouptut file name. The ouput HTML 
+> file will be viewed directly in your repository.
+> The HTML file is qualified by JTidy, and this program is verified sufficiently by 
+> JUnit test and JaCoCo. 
+> Q_CONVERTER is 100% open source so you can folk the code and contribute! 
 
-### Team Members:
-* [paulrbear] 21200167 JooHyung Kim
-* [boomkim] 21100088 BumHwan Kim
-* [Younhong] 21400022 Younhong Ko
-* [whaqldutk1] 21400722 Eunbee Jo
+## /README/
+* Input Format 
+> 	in_filename.md  -style  out_filename.html 
+> 
+> There can be one or more input files. 
+> At the end, there should be one output file's name and its type (.html).
+> Ignore brackets('[' or ']').
+> Separate each element with a white-space.
 
+* Basic Command Line Keywords 
+> *File Style*
+>	[ -p ] : plain style (default) 
+>	[ -f ] : fancy style 
+>	[ -s ] : slide style
+>
+> *Help window*
+>	[ -h ]	or [ help ] : "help"; shows help text. 
 
-### README 
-■ Input Format 
-	
-	1..*[in_filename.md] [-style] [out_filename.html]  
-
-	- There can be one or more input files. 
-	- At the end, there should be one output file's name and its type (.html).
-	- Ignore brackets('[' or ']').
-	- Separate each element with a white-space.
-
-■ Basic Command Line Keywords 
- - File Style
-	[ -p ] : plain style (default) 
-	[ -f ] : fancy style 
-	[ -s ] : slide style
-
- - Other Keyword(s)
- 	[ -h ]	or [ help ] : "help"; shows help text. 
-	
-
-■ More Regulations
+* More Regulations
  1. Filename only comprises of characters from the ACSII code.
  	It cannot contain any other characters. 
  2. Input and output filename cannot contain any white-space. 
@@ -41,3 +40,12 @@
  7. These characters are invalid for filename: [ < > : " / \ | ? * ]
  8. These strings are invalid for filename (SYSTEM regulation): [ CON, PRN, AUX, NUL ] 
  9. Only one option for Style is available.
+
+
+## /CONTRIBUTORS/
+* [paulrbear] JooHyung Kim
+* [boomkim] BumHwan Kim
+* [Younhong] Younhong Ko
+* [whaqldutk1] Eunbee Jo
+
+

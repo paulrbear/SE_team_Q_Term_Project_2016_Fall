@@ -23,9 +23,8 @@ public class MDConverter{
 			doc.accept(v);
 			break;
 		case 2:
-			break;
-		case 3:
-			break;
+			v = new FancyVisitor();
+			doc.accept(v);
 		default:
 			break;
 		}
